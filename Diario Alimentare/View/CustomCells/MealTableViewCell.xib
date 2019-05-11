@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina5_9" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="customEmotionCell" id="KGk-i7-Jjw" customClass="MealTableViewCell" customModule="Diario_Alimentare" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="80"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="79.666666666666671"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="PtA-zC-sZr">
+                        <rect key="frame" x="5" y="5" width="70" height="70"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="70" id="4wS-ca-LrC"/>
+                            <constraint firstAttribute="width" secondItem="PtA-zC-sZr" secondAttribute="height" multiplier="1:1" id="rWM-b9-5px"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="587-Uq-Hss">
+                        <rect key="frame" x="80" y="34.666666666666664" width="235" height="39.999999999999993"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="40" id="Jbp-5A-Wpt"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gvf-Kk-0HB">
+                        <rect key="frame" x="80" y="5.0000000000000018" width="235" height="29.666666666666671"/>
+                        <fontDescription key="fontDescription" type="system" weight="ultraLight" pointSize="12"/>
+                        <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="PtA-zC-sZr" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="NvA-ux-wTQ"/>
+                    <constraint firstItem="587-Uq-Hss" firstAttribute="leading" secondItem="PtA-zC-sZr" secondAttribute="trailing" constant="5" id="QpB-Yq-SqP"/>
+                    <constraint firstAttribute="trailing" secondItem="587-Uq-Hss" secondAttribute="trailing" constant="5" id="SDm-l9-9N6"/>
+                    <constraint firstAttribute="bottom" secondItem="587-Uq-Hss" secondAttribute="bottom" constant="5" id="aBC-jZ-9fN"/>
+                    <constraint firstItem="Gvf-Kk-0HB" firstAttribute="leading" secondItem="PtA-zC-sZr" secondAttribute="trailing" constant="5" id="ar1-2b-lpy"/>
+                    <constraint firstItem="587-Uq-Hss" firstAttribute="top" secondItem="Gvf-Kk-0HB" secondAttribute="bottom" id="cuI-MD-SBX"/>
+                    <constraint firstItem="Gvf-Kk-0HB" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="ecv-YC-dLM"/>
+                    <constraint firstAttribute="trailing" secondItem="Gvf-Kk-0HB" secondAttribute="trailing" constant="5" id="lxY-6P-p0M"/>
+                    <constraint firstItem="PtA-zC-sZr" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="5" id="viu-3D-BnD"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="dateOfTheMealLabel" destination="Gvf-Kk-0HB" id="fJP-Hb-hiW"/>
+                <outlet property="emotionForMealImage" destination="PtA-zC-sZr" id="4Zc-Nx-1gr"/>
+                <outlet property="whatForMealLabel" destination="587-Uq-Hss" id="xco-dq-Ynd"/>
+            </connections>
+            <point key="canvasLocation" x="131.19999999999999" y="152.95566502463055"/>
+        </tableViewCell>
+    </objects>
+</document>

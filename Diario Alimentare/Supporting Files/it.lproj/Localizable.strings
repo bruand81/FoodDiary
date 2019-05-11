@@ -1,0 +1,18 @@
+/* 
+  Localizable.strings
+  Diario Alimentare
+
+  Created by Andrea Bruno on 10/05/2019.
+  Copyright © 2019 Andrea Bruno. All rights reserved.
+*/
+
+"Happy" = "Felice";
+"Angry" = "Arrabbiato";
+"Annoyed" = "Annoiato";
+"Sick" = "Malato";
+"Disgust" = "Disgusto";
+"No emotion defined yet" = "Nessuna emozione presente";
+"Edit Emotion" = "Modifica Emozioni";
+"Add New Emotion" = "Aggiungi nuova emozione";
+"Select emoticon for emotion" = "Seleziona l'emoticon per le emozione";
+"Select description for emotion" = "Inserisci la descrizione per l'emozione";

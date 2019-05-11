@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -16,6 +17,42 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        print(Realm.Configuration.defaultConfiguration.fileURL!)
+        
+        do {
+            let realm = try Realm()
+            let emotions = realm.objects(Emotion.self)
+            
+            if emotions.count < 1 {
+                let happyEmotion = Emotion()
+                happyEmotion.emoticon = "😀"
+                happyEmotion.name = NSLocalizedString("Happy", comment: "Happy emotion description")
+                let angryEmotion = Emotion()
+                angryEmotion.emoticon = "😡"
+                angryEmotion.name = NSLocalizedString("Angry", comment: "Angry emotion description")
+                let annoyedEmotion = Emotion()
+                annoyedEmotion.emoticon = "😒"
+                annoyedEmotion.name = NSLocalizedString("Annoyed", comment: "Annoyed emotion description")
+                let sickEmotion = Emotion()
+                sickEmotion.emoticon = "🤕"
+                sickEmotion.name = NSLocalizedString("Sick", comment: "Sick emotion description")
+                let disgustEmotion = Emotion()
+                disgustEmotion.emoticon = "🤢"
+                disgustEmotion.name = NSLocalizedString("Disgust", comment: "Disgust emotion description")
+                try realm.write {
+                    realm.add(happyEmotion)
+                    realm.add(angryEmotion)
+                    realm.add(annoyedEmotion)
+                    realm.add(sickEmotion)
+                    realm.add(disgustEmotion)
+                }
+            }
+        } catch {
+            print("Error initialising \(error)")
+        }
+        
+       
+        
         return true
     }
 
