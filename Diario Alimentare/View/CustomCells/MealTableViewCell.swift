@@ -11,8 +11,7 @@ import UIKit
 class MealTableViewCell: UITableViewCell {
     @IBOutlet weak var dateOfTheMealLabel: UILabel!
     @IBOutlet weak var whatForMealLabel: UILabel!
-    
-    @IBOutlet weak var emotionForMealImage: UIImageView!
+    @IBOutlet weak var emoticonForMeal: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()

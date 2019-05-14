@@ -10,10 +10,11 @@
 		2825FDA1289570C5B3F59DB0 /* Pods_Diario_Alimentare.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8E10FDA80C2A05B91E2733D /* Pods_Diario_Alimentare.framework */; };
 		A50C0F9522868941005EB843 /* MealTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A50C0F9422868941005EB843 /* MealTableViewController.swift */; };
 		A50C0F972286899C005EB843 /* EmotionTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A50C0F962286899C005EB843 /* EmotionTableViewController.swift */; };
-		A50C0F9922868A79005EB843 /* MealDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A50C0F9822868A79005EB843 /* MealDetailsViewController.swift */; };
 		A50C0F9C22868B21005EB843 /* EmotionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A50C0F9A22868B21005EB843 /* EmotionTableViewCell.swift */; };
 		A50C0F9D22868B21005EB843 /* EmotionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A50C0F9B22868B21005EB843 /* EmotionTableViewCell.xib */; };
 		A50C0F9E2286CBEB005EB843 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = A50C0FA02286CBEB005EB843 /* Localizable.strings */; };
+		A51B973B228AAAC100C5118B /* MealDetailsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51B973A228AAAC100C5118B /* MealDetailsTableViewController.swift */; };
+		A51B973D228AC5E800C5118B /* Dish.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51B973C228AC5E800C5118B /* Dish.swift */; };
 		A5E61DEE2285BBE300B14772 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E61DED2285BBE300B14772 /* AppDelegate.swift */; };
 		A5E61DF02285BBE300B14772 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E61DEF2285BBE300B14772 /* ViewController.swift */; };
 		A5E61DF32285BBE300B14772 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A5E61DF12285BBE300B14772 /* Main.storyboard */; };
@@ -28,12 +29,13 @@
 /* Begin PBXFileReference section */
 		A50C0F9422868941005EB843 /* MealTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealTableViewController.swift; sourceTree = "<group>"; };
 		A50C0F962286899C005EB843 /* EmotionTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmotionTableViewController.swift; sourceTree = "<group>"; };
-		A50C0F9822868A79005EB843 /* MealDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealDetailsViewController.swift; sourceTree = "<group>"; };
 		A50C0F9A22868B21005EB843 /* EmotionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmotionTableViewCell.swift; sourceTree = "<group>"; };
 		A50C0F9B22868B21005EB843 /* EmotionTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EmotionTableViewCell.xib; sourceTree = "<group>"; };
 		A50C0F9F2286CBEB005EB843 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		A50C0FA12286CBF0005EB843 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/Localizable.strings; sourceTree = "<group>"; };
 		A50C0FA32286CC29005EB843 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
+		A51B973A228AAAC100C5118B /* MealDetailsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealDetailsTableViewController.swift; sourceTree = "<group>"; };
+		A51B973C228AC5E800C5118B /* Dish.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dish.swift; sourceTree = "<group>"; };
 		A5E61DEA2285BBE300B14772 /* Diario Alimentare.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Diario Alimentare.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5E61DED2285BBE300B14772 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A5E61DEF2285BBE300B14772 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -127,6 +129,7 @@
 			children = (
 				A5E61E072285C03B00B14772 /* Meal.swift */,
 				A5E61E092285C29A00B14772 /* Emotion.swift */,
+				A51B973C228AC5E800C5118B /* Dish.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -146,7 +149,7 @@
 				A5E61DEF2285BBE300B14772 /* ViewController.swift */,
 				A50C0F9422868941005EB843 /* MealTableViewController.swift */,
 				A50C0F962286899C005EB843 /* EmotionTableViewController.swift */,
-				A50C0F9822868A79005EB843 /* MealDetailsViewController.swift */,
+				A51B973A228AAAC100C5118B /* MealDetailsTableViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -293,13 +296,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				A5E61DF02285BBE300B14772 /* ViewController.swift in Sources */,
+				A51B973D228AC5E800C5118B /* Dish.swift in Sources */,
 				A5E61E082285C03B00B14772 /* Meal.swift in Sources */,
 				A50C0F9C22868B21005EB843 /* EmotionTableViewCell.swift in Sources */,
 				A5E61DEE2285BBE300B14772 /* AppDelegate.swift in Sources */,
+				A51B973B228AAAC100C5118B /* MealDetailsTableViewController.swift in Sources */,
 				A5E61E0A2285C29A00B14772 /* Emotion.swift in Sources */,
 				A50C0F9522868941005EB843 /* MealTableViewController.swift in Sources */,
 				A50C0F972286899C005EB843 /* EmotionTableViewController.swift in Sources */,
-				A50C0F9922868A79005EB843 /* MealDetailsViewController.swift in Sources */,
 				A5E61E0E2285C8E000B14772 /* MealTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

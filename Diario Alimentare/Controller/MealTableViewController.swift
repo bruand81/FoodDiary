@@ -91,6 +91,7 @@ class MealTableViewController: UITableViewController {
     
     // MARK: - Add new meal
     @IBAction func addMealButtonPressed(_ sender: UIBarButtonItem) {
+        performSegue(withIdentifier: "goToMealDetails", sender: self)
     }
     
     @IBAction func goToEmotionsButtonPressed(_ sender: UIBarButtonItem) {

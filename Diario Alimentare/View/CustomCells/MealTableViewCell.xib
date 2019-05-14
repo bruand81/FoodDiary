@@ -19,15 +19,8 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="79.666666666666671"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="PtA-zC-sZr">
-                        <rect key="frame" x="5" y="5" width="70" height="70"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="70" id="4wS-ca-LrC"/>
-                            <constraint firstAttribute="width" secondItem="PtA-zC-sZr" secondAttribute="height" multiplier="1:1" id="rWM-b9-5px"/>
-                        </constraints>
-                    </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="587-Uq-Hss">
-                        <rect key="frame" x="80" y="34.666666666666664" width="235" height="39.999999999999993"/>
+                        <rect key="frame" x="79.666666666666671" y="34.666666666666664" width="235.33333333333331" height="39.999999999999993"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="40" id="Jbp-5A-Wpt"/>
                         </constraints>
@@ -36,28 +29,38 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gvf-Kk-0HB">
-                        <rect key="frame" x="80" y="5.0000000000000018" width="235" height="29.666666666666671"/>
+                        <rect key="frame" x="79.666666666666671" y="5.0000000000000018" width="235.33333333333331" height="29.666666666666671"/>
                         <fontDescription key="fontDescription" type="system" weight="ultraLight" pointSize="12"/>
                         <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="😀" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FGr-M0-w4u">
+                        <rect key="frame" x="0.0" y="0.0" width="79.666666666666671" height="79.666666666666671"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="FGr-M0-w4u" secondAttribute="height" multiplier="1:1" id="wH0-Rg-pqe"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="PtA-zC-sZr" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="NvA-ux-wTQ"/>
-                    <constraint firstItem="587-Uq-Hss" firstAttribute="leading" secondItem="PtA-zC-sZr" secondAttribute="trailing" constant="5" id="QpB-Yq-SqP"/>
+                    <constraint firstItem="FGr-M0-w4u" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="POP-B3-aP2"/>
                     <constraint firstAttribute="trailing" secondItem="587-Uq-Hss" secondAttribute="trailing" constant="5" id="SDm-l9-9N6"/>
+                    <constraint firstItem="FGr-M0-w4u" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="V2U-y0-TYc"/>
                     <constraint firstAttribute="bottom" secondItem="587-Uq-Hss" secondAttribute="bottom" constant="5" id="aBC-jZ-9fN"/>
-                    <constraint firstItem="Gvf-Kk-0HB" firstAttribute="leading" secondItem="PtA-zC-sZr" secondAttribute="trailing" constant="5" id="ar1-2b-lpy"/>
                     <constraint firstItem="587-Uq-Hss" firstAttribute="top" secondItem="Gvf-Kk-0HB" secondAttribute="bottom" id="cuI-MD-SBX"/>
+                    <constraint firstItem="Gvf-Kk-0HB" firstAttribute="leading" secondItem="FGr-M0-w4u" secondAttribute="trailing" id="d4O-i1-5kM"/>
                     <constraint firstItem="Gvf-Kk-0HB" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="ecv-YC-dLM"/>
+                    <constraint firstItem="587-Uq-Hss" firstAttribute="leading" secondItem="FGr-M0-w4u" secondAttribute="trailing" id="iuX-Ga-Re9"/>
+                    <constraint firstAttribute="bottom" secondItem="FGr-M0-w4u" secondAttribute="bottom" id="j9X-DF-Gjp"/>
                     <constraint firstAttribute="trailing" secondItem="Gvf-Kk-0HB" secondAttribute="trailing" constant="5" id="lxY-6P-p0M"/>
-                    <constraint firstItem="PtA-zC-sZr" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="5" id="viu-3D-BnD"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="dateOfTheMealLabel" destination="Gvf-Kk-0HB" id="fJP-Hb-hiW"/>
-                <outlet property="emotionForMealImage" destination="PtA-zC-sZr" id="4Zc-Nx-1gr"/>
+                <outlet property="emoticonForMeal" destination="FGr-M0-w4u" id="v60-GO-Ep8"/>
                 <outlet property="whatForMealLabel" destination="587-Uq-Hss" id="xco-dq-Ynd"/>
             </connections>
             <point key="canvasLocation" x="131.19999999999999" y="152.95566502463055"/>
