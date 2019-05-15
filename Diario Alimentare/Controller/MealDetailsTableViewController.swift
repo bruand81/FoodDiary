@@ -7,8 +7,10 @@
 //
 
 import UIKit
+import ChameleonFramework
 
-class MealDetailsTableViewController: UITableViewController {
+class MealDetailsTableViewController: UITableViewController, UIPickerViewDataSource, UIPickerViewDelegate {
+    
     var meal: Meal?
     var emotionForMeal: Emotion?
     var dateOfMeal = Date()
@@ -19,6 +21,7 @@ class MealDetailsTableViewController: UITableViewController {
         tableView.isEditing = true
         if let _ = meal?.dishes {
             meal = Meal()
+            meal?.when = Date()
             _isUpdate = false
         }
         // Uncomment the following line to preserve selection between presentations
@@ -38,11 +41,11 @@ class MealDetailsTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         switch section {
-        case 0:
+        case 0: //Meal emotion
             return 1
-        case 1:
+        case 1: //Meal date
             return 1
-        case 2:
+        case 2: //Meal content
             guard let dishesForMeal = meal?.dishes else {return 1}
             return dishesForMeal.count + 1
         default:
@@ -53,28 +56,99 @@ class MealDetailsTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch indexPath.section {
             case 0: //Meal emotion
-                let cell = tableView.dequeueReusableCell(withIdentifier: "mealEmotionAndDateCell", for: indexPath)
+                let cell = defaultCellForEmotionAndDate(tableView, at: indexPath)
+                
+                //Input view
+                let picker: UIPickerView
+                picker = UIPickerView(frame: CGRect(origin: CGPoint(x: 0,y :200), size: CGSize(width: view.frame.width, height: 300)))
+                picker.backgroundColor = FlatWhite()
+                
+                picker.showsSelectionIndicator = true
+                picker.delegate = self
+                picker.dataSource = self
+                
+                let toolBar = UIToolbar()
+                toolBar.barStyle = .default
+                toolBar.isTranslucent = true
+                toolBar.tintColor = UIColor(red: 76/255, green: 217/255, blue: 100/255, alpha: 1)
+                toolBar.sizeToFit()
+                
+                let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(donePicker))
+                let spaceButton = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+                let cancelButton = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(donePicker))
+                
+                toolBar.setItems([cancelButton, spaceButton, doneButton], animated: false)
+                toolBar.isUserInteractionEnabled = true
+                
+                //
+                
+                guard let emotionForMeal = meal?.emotionForMeal, let emoticonForMeal = emotionForMeal.first else {
+                    return defaultCellValueForEmotionAndDateCell(cell: cell, message: NSLocalizedString("Click to select the emotion", comment: ""))
+                }
+                if emoticonForMeal.emoticon == "" {
+                    return defaultCellValueForEmotionAndDateCell(cell: cell, message: NSLocalizedString("Click to select the emotion", comment: ""))
+                }
+                cell.textLabel?.text = "\(emoticonForMeal.emoticon) \(emoticonForMeal.name)"
                 return cell
             case 1: //Meal date
-                let cell = tableView.dequeueReusableCell(withIdentifier: "mealEmotionAndDateCell", for: indexPath)
+                let cell = defaultCellForEmotionAndDate(tableView, at: indexPath)
+                
                 let dateFormatter = DateFormatter()
                 dateFormatter.dateStyle = .long
                 dateFormatter.timeStyle = .short
+                
+                guard let dateOfMeal = meal?.when else {
+                    cell.textLabel?.text = dateFormatter.string(from: Date())
+                    return cell
+                }
                 cell.textLabel?.text = dateFormatter.string(from: dateOfMeal)
+                
                 return cell
             case 2: //Meal content
                 let cell = tableView.dequeueReusableCell(withIdentifier: "mealContent", for: indexPath)
+                
                 guard let dishesForMeal = meal?.dishes else {
                     return configureForAddMeal(cell: cell)
                 }
+                
                 if indexPath.row >= dishesForMeal.count {
                     return configureForAddMeal(cell: cell)
                 }
+                
                 cell.textLabel?.text = dishesForMeal[indexPath.row].name
+                
                 return cell
             default:
                 fatalError()
         }
+    }
+    
+    @objc func donePicker(){
+        
+    }
+    
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return "Test"
+    }
+    
+    func defaultCellValueForEmotionAndDateCell(cell: UITableViewCell, message: String) -> UITableViewCell {
+        cell.textLabel?.text = message
+        cell.textLabel?.textColor = FlatGray()
+        return cell
+    }
+    
+    func defaultCellForEmotionAndDate(_ tableView: UITableView, at indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "mealEmotionAndDateCell", for: indexPath)
+        cell.accessoryType = .disclosureIndicator
+        return cell
     }
     
     override func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
