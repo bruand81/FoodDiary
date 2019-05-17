@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import SwipeCellKit
 
-class MealTableViewCell: UITableViewCell {
+class MealTableViewCell: SwipeTableViewCell {
     @IBOutlet weak var dateOfTheMealLabel: UILabel!
     @IBOutlet weak var whatForMealLabel: UILabel!
     @IBOutlet weak var emoticonForMeal: UILabel!

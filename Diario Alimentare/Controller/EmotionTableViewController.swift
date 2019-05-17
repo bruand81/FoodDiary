@@ -122,6 +122,7 @@ class EmotionTableViewController: UITableViewController, SwipeTableViewCellDeleg
             if let emotionForDeletion = self.emotions?[indexPath.row] {
                 do{
                     try self.realm.write {
+                        self.realm.delete(emotionForDeletion.meals)
                         self.realm.delete(emotionForDeletion)
                     }
                 } catch {

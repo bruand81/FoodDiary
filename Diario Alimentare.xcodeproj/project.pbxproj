@@ -15,6 +15,7 @@
 		A50C0F9E2286CBEB005EB843 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = A50C0FA02286CBEB005EB843 /* Localizable.strings */; };
 		A51B973B228AAAC100C5118B /* MealDetailsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51B973A228AAAC100C5118B /* MealDetailsTableViewController.swift */; };
 		A51B973D228AC5E800C5118B /* Dish.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51B973C228AC5E800C5118B /* Dish.swift */; };
+		A53F7B91228EF6D400BDCF41 /* DatePickerViewCellWithToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53F7B90228EF6D400BDCF41 /* DatePickerViewCellWithToolbar.swift */; };
 		A5E61DEE2285BBE300B14772 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E61DED2285BBE300B14772 /* AppDelegate.swift */; };
 		A5E61DF02285BBE300B14772 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E61DEF2285BBE300B14772 /* ViewController.swift */; };
 		A5E61DF32285BBE300B14772 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A5E61DF12285BBE300B14772 /* Main.storyboard */; };
@@ -36,6 +37,7 @@
 		A50C0FA32286CC29005EB843 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
 		A51B973A228AAAC100C5118B /* MealDetailsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealDetailsTableViewController.swift; sourceTree = "<group>"; };
 		A51B973C228AC5E800C5118B /* Dish.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dish.swift; sourceTree = "<group>"; };
+		A53F7B90228EF6D400BDCF41 /* DatePickerViewCellWithToolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerViewCellWithToolbar.swift; sourceTree = "<group>"; };
 		A5E61DEA2285BBE300B14772 /* Diario Alimentare.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Diario Alimentare.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5E61DED2285BBE300B14772 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A5E61DEF2285BBE300B14772 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -120,6 +122,7 @@
 				A5E61DF42285BBE900B14772 /* Assets.xcassets */,
 				A5E61DF62285BBE900B14772 /* LaunchScreen.storyboard */,
 				A50C0FA02286CBEB005EB843 /* Localizable.strings */,
+				A53F7B90228EF6D400BDCF41 /* DatePickerViewCellWithToolbar.swift */,
 			);
 			path = "Supporting Files";
 			sourceTree = "<group>";
@@ -270,6 +273,7 @@
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Diario Alimentare/Pods-Diario Alimentare-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/ChameleonFramework/ChameleonFramework.framework",
+				"${BUILT_PRODUCTS_DIR}/PickerViewCell/PickerViewCell.framework",
 				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
 				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/SwipeCellKit/SwipeCellKit.framework",
@@ -279,6 +283,7 @@
 			);
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ChameleonFramework.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PickerViewCell.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwipeCellKit.framework",
@@ -305,6 +310,7 @@
 				A50C0F9522868941005EB843 /* MealTableViewController.swift in Sources */,
 				A50C0F972286899C005EB843 /* EmotionTableViewController.swift in Sources */,
 				A5E61E0E2285C8E000B14772 /* MealTableViewCell.swift in Sources */,
+				A53F7B91228EF6D400BDCF41 /* DatePickerViewCellWithToolbar.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

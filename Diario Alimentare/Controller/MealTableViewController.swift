@@ -7,13 +7,30 @@
 //
 
 import UIKit
+import RealmSwift
+import SwipeCellKit
 
 class MealTableViewController: UITableViewController {
     @IBOutlet weak var emotionButton: UIBarButtonItem!
+    let realm = try! Realm()
+    var meals: Results<Meal>?
+    var createNewMeal = false
+    
+    fileprivate lazy var dateFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateStyle = DateFormatter.Style.long
+        formatter.timeStyle = DateFormatter.Style.short
+        return formatter
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         emotionButton.title = "☺︎"
+        
+        tableView.register(UINib(nibName: "MealTableViewCell", bundle: nil), forCellReuseIdentifier: MealTableViewCell().reuseIdentifier ?? "customMealCell")
+        tableView.rowHeight = 80.0
+        
+        loadMeals()
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -25,24 +42,48 @@ class MealTableViewController: UITableViewController {
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
+        return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 0
+        return meals?.count ?? 1
     }
 
-    /*
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
-        // Configure the cell...
-
+        let cell = tableView.dequeueReusableCell(withIdentifier: MealTableViewCell().reuseIdentifier ?? "customMealCell", for: indexPath) as! MealTableViewCell
+        cell.delegate = self
+        
+        guard let meal = meals?[indexPath.row] else {
+            cell.emoticonForMeal.text="❌"
+            cell.dateOfTheMealLabel.text = ""
+            cell.whatForMealLabel.text = NSLocalizedString("No meals inserted", comment: "")
+            return cell
+        }
+        
+        cell.emoticonForMeal.text = meal.emotionForMeal.first?.emoticon
+        cell.dateOfTheMealLabel.text = "\(meal.name) - \(dateFormatter.string(from: meal.when))"
+        cell.whatForMealLabel.text = meal.dishes.map({ (dish) -> String in
+            return dish.name
+        }).joined(separator: ",")
+        
         return cell
     }
-    */
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        createNewMeal = false
+        performSegue(withIdentifier: "goToMealDetails", sender: self)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "goToMealDetails" {
+            let destinationVC = segue.destination as! MealDetailsTableViewController
+            if !createNewMeal {
+                if let indexPath = tableView.indexPathForSelectedRow {
+                    destinationVC.meal = meals![indexPath.row]
+                }
+            }
+        }
+    }
 
     /*
     // Override to support conditional editing of the table view.
@@ -89,13 +130,53 @@ class MealTableViewController: UITableViewController {
     }
     */
     
+    func loadMeals() {
+        meals = realm.objects(Meal.self).sorted(byKeyPath: "when", ascending: true)
+        tableView.reloadData()
+    }
+    
     // MARK: - Add new meal
     @IBAction func addMealButtonPressed(_ sender: UIBarButtonItem) {
+        createNewMeal = true
         performSegue(withIdentifier: "goToMealDetails", sender: self)
     }
     
     @IBAction func goToEmotionsButtonPressed(_ sender: UIBarButtonItem) {
         performSegue(withIdentifier: "goToEmotions", sender: self)
+    }
+    
+}
+// MARK: - SwipeCellKit methods
+extension MealTableViewController: SwipeTableViewCellDelegate {
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> [SwipeAction]? {
+        guard orientation == .right else {return nil}
+        
+        let deleteAction = SwipeAction(style: .destructive, title: "Delete") { action, indexPath in
+            if let mealForDeletion = self.meals?[indexPath.row] {
+                do{
+                    try self.realm.write {
+                        self.realm.delete(mealForDeletion.dishes)
+                        self.realm.delete(mealForDeletion)
+                    }
+                } catch {
+                    print("Error deleting meal \(error)")
+                }
+                
+                //                tableView.reloadData()
+            }
+        }
+        
+        deleteAction.image = UIImage(named: "delete-icon")
+        return [deleteAction]
+    }
+    
+    func tableView(_ tableView: UITableView, editActionsOptionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> SwipeOptions {
+        var options = SwipeOptions()
+        
+        options.expansionStyle = .destructive
+        options.transitionStyle = .border
+        
+        return options
     }
     
 }

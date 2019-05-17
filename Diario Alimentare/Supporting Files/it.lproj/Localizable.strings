@@ -20,3 +20,14 @@
 "Meal emotion" = "Come ti senti dopo il pasto?";
 "Meal date" = "Data e ora del pasto";
 "Click to select the emotion" = "Clicca per selezionare l'emozione";
+"No meals inserted" = "Nessun pasto inserito";
+"Add new dish" = "Aggiungi nuova pietanza";
+"Add Dish" = "Aggiungi pietanza";
+"Dish content" = "Pietanza";
+"Meal name" = "Che pasto era?";
+"Add name" = "Inserisci";
+"Insert meal name" = "Inserisci tipo di pasto";
+"Insert the a name of this meal (e.g. Launch, Dinner, etc...)" = "Inserisci il tipo di pasto (e.g. Pranzo, Cena, Spuntino, etc...)";
+"Modify new dish" = "Modifica pietanza";
+"Modify the selected dishes for this meal" = "modifica la pietanza selezionata";
+"Modify Dish" = "Modifica pietanza";

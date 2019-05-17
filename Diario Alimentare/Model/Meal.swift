@@ -10,7 +10,7 @@ import Foundation
 import RealmSwift
 
 class Meal: Object {
-    @objc dynamic private var _id = UUID().uuidString
+    @objc dynamic var _id = UUID().uuidString
     @objc dynamic var name: String = ""
     @objc dynamic var when: Date = Date()
     var emotionForMeal = LinkingObjects<Emotion>(fromType: Emotion.self, property: "meals")
@@ -19,4 +19,9 @@ class Meal: Object {
     override static func primaryKey() -> String? {
         return "_id"
     }
+    
+    static func ==(lhs: Meal, rhs: Meal) -> Bool {
+        return lhs._id == rhs._id
+    }
+
 }

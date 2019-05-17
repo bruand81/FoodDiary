@@ -9,5 +9,6 @@ target 'Diario Alimentare' do
   pod 'RealmSwift'
   pod 'SwipeCellKit'
   pod 'ChameleonFramework/Swift', :git => 'https://github.com/ViccAlexander/Chameleon.git'
+  pod 'PickerViewCell', :git => 'https://github.com/bruand81/PickerViewCell.git'
 
 end
