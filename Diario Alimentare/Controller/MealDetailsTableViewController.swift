@@ -18,6 +18,10 @@ enum SectionOfMealDetails: Int {
     case mealContent = 3
 }
 
+protocol MealDetailDelegate {
+    func updatedMealDetails()
+}
+
 class MealDetailsTableViewController: UITableViewController {
 
     var meal: Meal?
@@ -28,6 +32,7 @@ class MealDetailsTableViewController: UITableViewController {
     var indexPathForEmotion: IndexPath?
     var duplicateExitBarrier: Bool = false
     var duplicateDatePickerExitBarrier: Bool = false
+    var delegate: MealDetailDelegate?
     
     lazy var emotions: Results<Emotion> = realm.objects(Emotion.self).sorted(byKeyPath: "name", ascending: true)
     private var _isUpdate = true
@@ -190,7 +195,7 @@ class MealDetailsTableViewController: UITableViewController {
             present(alert, animated: true, completion: nil)
         } else if indexPath.section == SectionOfMealDetails.mealContent.rawValue {
             guard let cell = tableView.cellForRow(at: indexPath) else {return}
-            if indexPath.row > meal!.dishes.count {
+            if indexPath.row > meal!.dishes.count || meal!.dishes.count == 0{
                 addNewDish()
             } else {
                 var textField = UITextField()
@@ -368,22 +373,31 @@ class MealDetailsTableViewController: UITableViewController {
     }
     */
 
-//    @IBAction func cancelButtonPressed(_ sender: UIBarButtonItem) {
-//        if let mealToDelete = meal {
-//            do {
-//                try realm.write {
-//                    realm.delete(mealToDelete)
-//                }
-//            } catch {
-//                print("Error deleting item")
-//            }
-//        }
-//        self.dismiss(animated: true, completion: nil)
-//    }
-//    
-//    @IBAction func doneButtonPressed(_ sender: UIBarButtonItem) {
-//        self.dismiss(animated: true, completion: nil) 
-//    }
+    @IBAction func cancelButtonPressed(_ sender: UIBarButtonItem) {
+        if !_isUpdate {
+            if let mealsToDelete = realm.objects(Meal.self).filter("_id=%@",meal?._id ?? "").first {
+                do {
+                    try realm.write {
+                        realm.delete(mealsToDelete.dishes)
+                        realm.delete(mealsToDelete)
+                    }
+                } catch {
+                    print("Error deleting item")
+                }
+                
+            }
+        }
+        
+        delegate?.updatedMealDetails()
+        self.navigationController?.popViewController(animated: true)
+        self.dismiss(animated: true, completion: nil)
+    }
+
+    @IBAction func doneButtonPressed(_ sender: UIBarButtonItem) {
+        delegate?.updatedMealDetails()
+        self.navigationController?.popViewController(animated: true)
+        self.dismiss(animated: true, completion: nil)
+    }
 }
 
 // MARK: - DatePickerTableCellDelegate
@@ -464,10 +478,10 @@ extension MealDetailsTableViewController : PickerTableCellDelegate, PickerTableC
         duplicateExitBarrier = true
         emotionCell.textLabel?.textColor = FlatBlack()
         guard let currentMeal = meal, let emotion = emotionForMeal else {return}
-        print("\(meal!._id) \(meal!.name)")
+
         do {
             if !emotion.meals.contains(currentMeal) {
-                print("Emotion not contains meal")
+
                 if meal?.emotionForMeal.count ?? 0 > 0
                 {
                     guard let oldEmotion = meal?.emotionForMeal.first else {return}
@@ -480,10 +494,9 @@ extension MealDetailsTableViewController : PickerTableCellDelegate, PickerTableC
                 try realm.write {
                     emotion.meals.append(currentMeal)
                 }
-            } else {
-                print("Emotion already contains meal")
-            }
+            } 
             _ = cell.resignFirstResponder()
+            meal = realm.objects(Meal.self).filter("_id=%@",meal?._id ?? "").first
             tableView.reloadData()
         } catch {
             print("error updating emotion in meal\(error)")

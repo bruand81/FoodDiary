@@ -77,6 +77,7 @@ class MealTableViewController: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "goToMealDetails" {
             let destinationVC = segue.destination as! MealDetailsTableViewController
+            destinationVC.delegate = self
             if !createNewMeal {
                 if let indexPath = tableView.indexPathForSelectedRow {
                     destinationVC.meal = meals![indexPath.row]
@@ -179,4 +180,10 @@ extension MealTableViewController: SwipeTableViewCellDelegate {
         return options
     }
     
+}
+
+extension MealTableViewController: MealDetailDelegate {
+    func updatedMealDetails() {
+        loadMeals()
+    }
 }
