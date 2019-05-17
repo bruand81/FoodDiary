@@ -10,11 +10,49 @@ import UIKit
 import RealmSwift
 import SwipeCellKit
 
+struct MealDetailSection: Comparable {
+    var month: Date
+    var meals: [Meal]
+    
+    static func < (lhs: MealDetailSection, rhs: MealDetailSection) -> Bool {
+        return lhs.month < rhs.month
+    }
+    
+    static func == (lhs: MealDetailSection, rhs: MealDetailSection) -> Bool {
+        return lhs.month == rhs.month
+    }
+    
+    static func > (lhs: MealDetailSection, rhs: MealDetailSection) -> Bool {
+        return lhs.month > rhs.month
+    }
+    
+    static func group(meals : Results<Meal>) -> [MealDetailSection] {
+        let groups = Dictionary(grouping: meals) { (meal) -> Date in
+            return firstDayOfMonth(date: meal.when)
+        }
+        return groups.map({ (key, values) in
+            return MealDetailSection(month: key, meals: values.sorted(by: { (lhs, rhs) -> Bool in
+                lhs.when > rhs.when
+            }))
+        }).sorted().reversed()/*.sorted(by: { (lhs, rhs) -> Bool in
+            lhs > rhs
+        })*/
+    }
+    
+}
+
+fileprivate func firstDayOfMonth(date : Date) -> Date {
+    let calendar = Calendar.current
+    let components = calendar.dateComponents([.year, .month], from: date)
+    return calendar.date(from: components)!
+}
+
 class MealTableViewController: UITableViewController {
     @IBOutlet weak var emotionButton: UIBarButtonItem!
     let realm = try! Realm()
     var meals: Results<Meal>?
     var createNewMeal = false
+    var sections = [MealDetailSection]()
     
     fileprivate lazy var dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
@@ -42,23 +80,23 @@ class MealTableViewController: UITableViewController {
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return sections.count > 0 ? sections.count : 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return meals?.count ?? 1
+        return sections.count > 0 ? sections[section].meals.count : 1
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: MealTableViewCell().reuseIdentifier ?? "customMealCell", for: indexPath) as! MealTableViewCell
         cell.delegate = self
-        
-        guard let meal = meals?[indexPath.row] else {
-            cell.emoticonForMeal.text="❌"
-            cell.dateOfTheMealLabel.text = ""
-            cell.whatForMealLabel.text = NSLocalizedString("No meals inserted", comment: "")
-            return cell
+        if (sections.count < 1){
+            return defaultCell(cell: cell)
         }
+//        guard let meal = meals?[indexPath.row] else {
+//            return defaultCell(cell: cell)
+//        }
+        let meal = sections[indexPath.section].meals[indexPath.row]
         
         cell.emoticonForMeal.text = meal.emotionForMeal.first?.emoticon
         cell.dateOfTheMealLabel.text = "\(meal.name) - \(dateFormatter.string(from: meal.when))"
@@ -66,6 +104,13 @@ class MealTableViewController: UITableViewController {
             return dish.name
         }).joined(separator: ",")
         
+        return cell
+    }
+    
+    func defaultCell(cell: MealTableViewCell) -> MealTableViewCell {
+        cell.emoticonForMeal.text="❌"
+        cell.dateOfTheMealLabel.text = ""
+        cell.whatForMealLabel.text = NSLocalizedString("No meals inserted", comment: "")
         return cell
     }
     
@@ -80,10 +125,18 @@ class MealTableViewController: UITableViewController {
             destinationVC.delegate = self
             if !createNewMeal {
                 if let indexPath = tableView.indexPathForSelectedRow {
-                    destinationVC.meal = meals![indexPath.row]
+                    destinationVC.meal = sections[indexPath.section].meals[indexPath.row]
                 }
             }
         }
+    }
+    
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        let section = self.sections[section]
+        let date = section.month
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MMMM yyyy"
+        return dateFormatter.string(from: date)
     }
 
     /*
@@ -132,7 +185,16 @@ class MealTableViewController: UITableViewController {
     */
     
     func loadMeals() {
-        meals = realm.objects(Meal.self).sorted(byKeyPath: "when", ascending: true)
+        let startDate = firstDayOfMonth(date: Date(timeInterval: TimeInterval(floatLiteral: -1*3*30*24*60*60), since: Date()))
+        meals = realm.objects(Meal.self).filter("when >= %@", startDate).sorted(byKeyPath: "when", ascending: true)
+//        let groups = Dictionary(grouping: self.meals!) { (meal) in
+//            return firstDayOfMonth(date: meal.when)
+//        }
+//
+//        self.sections = groups.map({ (key, values) in
+//            return MealDetailSection(month: key, meals: values)
+//        })
+        self.sections = MealDetailSection.group(meals: self.meals!)
         tableView.reloadData()
     }
     
@@ -153,18 +215,18 @@ extension MealTableViewController: SwipeTableViewCellDelegate {
         guard orientation == .right else {return nil}
         
         let deleteAction = SwipeAction(style: .destructive, title: "Delete") { action, indexPath in
-            if let mealForDeletion = self.meals?[indexPath.row] {
-                do{
-                    try self.realm.write {
-                        self.realm.delete(mealForDeletion.dishes)
-                        self.realm.delete(mealForDeletion)
-                    }
-                } catch {
-                    print("Error deleting meal \(error)")
+            let mealForDeletion = self.sections[indexPath.section].meals[indexPath.row]
+            do{
+                try self.realm.write {
+                    self.realm.delete(mealForDeletion.dishes)
+                    self.realm.delete(mealForDeletion)
                 }
+            } catch {
+                print("Error deleting meal \(error)")
+            }
+            self.loadMeals()
                 
                 //                tableView.reloadData()
-            }
         }
         
         deleteAction.image = UIImage(named: "delete-icon")
