@@ -102,7 +102,7 @@ class MealTableViewController: UITableViewController {
         cell.dateOfTheMealLabel.text = "\(meal.name) - \(dateFormatter.string(from: meal.when))"
         cell.whatForMealLabel.text = meal.dishes.map({ (dish) -> String in
             return dish.name
-        }).joined(separator: ",")
+        }).joined(separator: ", ")
         
         return cell
     }
@@ -132,10 +132,14 @@ class MealTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if sections.count == 0 {
+            return nil
+        }
         let section = self.sections[section]
         let date = section.month
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MMMM yyyy"
+        dateFormatter.timeZone = TimeZone.current
         return dateFormatter.string(from: date)
     }
 

@@ -41,6 +41,7 @@ class MealDetailsTableViewController: UITableViewController {
         let formatter = DateFormatter()
         formatter.dateStyle = DateFormatter.Style.long
         formatter.timeStyle = DateFormatter.Style.short
+        formatter.timeZone = TimeZone.current
         return formatter
     }()
 
@@ -175,6 +176,8 @@ class MealDetailsTableViewController: UITableViewController {
                 }
             }
             
+            let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel, handler: nil)
+            
             alert.addTextField { (alertTextField) in
                 guard let currentMeal = self.meal else {
                     alertTextField.placeholder = NSLocalizedString("Meal name", comment: "")
@@ -191,16 +194,19 @@ class MealDetailsTableViewController: UITableViewController {
             }
             
             alert.addAction(action)
+            alert.addAction(cancelAction)
             
             present(alert, animated: true, completion: nil)
         } else if indexPath.section == SectionOfMealDetails.mealContent.rawValue {
             guard let cell = tableView.cellForRow(at: indexPath) else {return}
             if indexPath.row > meal!.dishes.count || meal!.dishes.count == 0{
-                addNewDish()
+                return addNewDish()
             } else {
                 var textField = UITextField()
                 
                 let alert = UIAlertController(title: NSLocalizedString("Modify new dish", comment: ""), message: "Modify the selected dishes for this meal", preferredStyle: .alert)
+                
+                let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel, handler: nil)
                 
                 let action = UIAlertAction(title: NSLocalizedString("Modify Dish", comment: ""), style: .default) { (action) in
                     //What will happen when the user clicks the Add Button on our UIAlert
@@ -223,6 +229,7 @@ class MealDetailsTableViewController: UITableViewController {
                 }
                 
                 alert.addAction(action)
+                alert.addAction(cancelAction)
                 
                 present(alert, animated: true, completion: nil)
             }
@@ -322,6 +329,7 @@ class MealDetailsTableViewController: UITableViewController {
         
         let alert = UIAlertController(title: NSLocalizedString("Add new dish", comment: ""), message: "Add a new dishes for this meal", preferredStyle: .alert)
         
+        let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel, handler: nil)
         let action = UIAlertAction(title: NSLocalizedString("Add Dish", comment: ""), style: .default) { (action) in
             //What will happen when the user clicks the Add Button on our UIAlert
             if let addDishText = textField.text {
@@ -345,6 +353,7 @@ class MealDetailsTableViewController: UITableViewController {
         }
         
         alert.addAction(action)
+        alert.addAction(cancelAction)
         
         present(alert, animated: true, completion: nil)
     }

@@ -25,7 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
             if emotions.count < 1 {
                 let happyEmotion = Emotion()
-                happyEmotion.emoticon = "😀"
+                happyEmotion.emoticon = "😁"
                 happyEmotion.name = NSLocalizedString("Happy", comment: "Happy emotion description")
                 let angryEmotion = Emotion()
                 angryEmotion.emoticon = "😡"

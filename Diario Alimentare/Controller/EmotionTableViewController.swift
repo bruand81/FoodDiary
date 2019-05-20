@@ -165,6 +165,7 @@ class EmotionTableViewController: UITableViewController, SwipeTableViewCellDeleg
         }
         
         let alert = UIAlertController(title: NSLocalizedString(alertTitle, comment: ""), message: "", preferredStyle: .alert)
+        let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel, handler: nil)
         let action = UIAlertAction(title: NSLocalizedString(alertTitle, comment: ""), style: .default) { (action) in
             if let emoticon = emoticonTextField.text, let emotionName = nameTextField.text {
                 let newEmotion = Emotion()
@@ -199,6 +200,7 @@ class EmotionTableViewController: UITableViewController, SwipeTableViewCellDeleg
         }
         
         alert.addAction(action)
+        alert.addAction(cancelAction)
         
         present(alert, animated: true, completion: nil)
     }
