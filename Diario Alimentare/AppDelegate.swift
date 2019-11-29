@@ -8,6 +8,7 @@
 
 import UIKit
 import RealmSwift
+import ChameleonFramework
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -51,7 +52,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             print("Error initialising \(error)")
         }
         
-       
+        Chameleon.setGlobalThemeUsingPrimaryColor(UIColor.flatBlue(), with: UIContentStyle.light)
         
         return true
     }

@@ -9,6 +9,7 @@
 import UIKit
 import RealmSwift
 import SwipeCellKit
+import ChameleonFramework
 
 struct MealDetailSection: Comparable {
     var month: Date
@@ -68,6 +69,18 @@ class MealTableViewController: UITableViewController {
         tableView.register(UINib(nibName: "MealTableViewCell", bundle: nil), forCellReuseIdentifier: MealTableViewCell().reuseIdentifier ?? "customMealCell")
         tableView.rowHeight = 80.0
         
+        self.navigationController?.hidesNavigationBarHairline = true
+        
+        if #available(iOS 13.0, *) {
+            let navBarAppearance = UINavigationBarAppearance()
+            navBarAppearance.configureWithOpaqueBackground()
+            navBarAppearance.backgroundColor = UIColor.flatBlue()
+            navBarAppearance.titleTextAttributes = [.foregroundColor: ContrastColorOf(navBarAppearance.backgroundColor ?? UIColor.flatBlue(), returnFlat: true)]
+            navBarAppearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
+            navigationController?.navigationBar.standardAppearance = navBarAppearance
+            navigationController?.navigationBar.scrollEdgeAppearance = navBarAppearance
+        }
+        
         loadMeals()
 
         // Uncomment the following line to preserve selection between presentations
@@ -75,6 +88,24 @@ class MealTableViewController: UITableViewController {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
+    }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        
+        if #available(iOS 13.0, *) {
+            let hasUserInterfaceStyleChanged = previousTraitCollection?.hasDifferentColorAppearance(comparedTo: traitCollection) ?? false
+            
+            if hasUserInterfaceStyleChanged {
+                let userInterfaceStyle = traitCollection.userInterfaceStyle
+                if userInterfaceStyle == .dark {
+                    Chameleon.setGlobalThemeUsingPrimaryColor(UIColor.flatBlue(), with: UIContentStyle.dark)
+                } else {
+                    Chameleon.setGlobalThemeUsingPrimaryColor(UIColor.flatBlue(), with: UIContentStyle.light)
+                }
+            }
+        }
+        
     }
 
     // MARK: - Table view data source
@@ -115,7 +146,7 @@ class MealTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        createNewMeal = false
+        createNewMeal = (sections.count < 1)
         performSegue(withIdentifier: "goToMealDetails", sender: self)
     }
     
