@@ -13,3 +13,6 @@
 
 /* Class = "UINavigationItem"; title = "Food Diary"; ObjectID = "jCY-4J-4gm"; */
 "jCY-4J-4gm.title" = "Diario Alimentare";
+
+/* Class = "UINavigationItem"; title = "Meal"; ObjectID = "OF1-zX-sMh"; */
+"OF1-zX-sMh.title" = "Pasto";
