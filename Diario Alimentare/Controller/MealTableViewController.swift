@@ -50,7 +50,7 @@ fileprivate func firstDayOfMonth(date : Date) -> Date {
 
 class MealTableViewController: UITableViewController {
     @IBOutlet weak var emotionButton: UIBarButtonItem!
-    let realm = try! Realm()
+    // let realm = try! Realm()
     var meals: Results<Meal>?
     var createNewMeal = false
     var sections = [MealDetailSection]()
@@ -220,6 +220,7 @@ class MealTableViewController: UITableViewController {
     */
     
     func loadMeals() {
+        let realm = try! Realm()
         let startDate = firstDayOfMonth(date: Date(timeInterval: TimeInterval(floatLiteral: -1*3*30*24*60*60), since: Date()))
         meals = realm.objects(Meal.self).filter("when >= %@", startDate).sorted(byKeyPath: "when", ascending: true)
 //        let groups = Dictionary(grouping: self.meals!) { (meal) in
@@ -252,9 +253,10 @@ extension MealTableViewController: SwipeTableViewCellDelegate {
         let deleteAction = SwipeAction(style: .destructive, title: "Delete") { action, indexPath in
             let mealForDeletion = self.sections[indexPath.section].meals[indexPath.row]
             do{
-                try self.realm.write {
-                    self.realm.delete(mealForDeletion.dishes)
-                    self.realm.delete(mealForDeletion)
+                let realm = try! Realm()
+                try realm.write {
+                    realm.delete(mealForDeletion.dishes)
+                    realm.delete(mealForDeletion)
                 }
             } catch {
                 print("Error deleting meal \(error)")

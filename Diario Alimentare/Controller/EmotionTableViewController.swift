@@ -12,7 +12,7 @@ import SwipeCellKit
 
 class EmotionTableViewController: UITableViewController, SwipeTableViewCellDelegate {
     
-    let realm = try! Realm()
+    // let realm = try! Realm()
     var emotions: Results<Emotion>?
     var emotionToModify: Emotion?
 
@@ -109,6 +109,7 @@ class EmotionTableViewController: UITableViewController, SwipeTableViewCellDeleg
     */
     //MARK: - Data Manipulation
     func loadEmotions() {
+        let realm = try! Realm()
         emotions = realm.objects(Emotion.self).sorted(byKeyPath: "name", ascending: true)
         
         tableView.reloadData()
@@ -121,9 +122,10 @@ class EmotionTableViewController: UITableViewController, SwipeTableViewCellDeleg
         let deleteAction = SwipeAction(style: .destructive, title: "Delete") { action, indexPath in
             if let emotionForDeletion = self.emotions?[indexPath.row] {
                 do{
-                    try self.realm.write {
-                        self.realm.delete(emotionForDeletion.meals)
-                        self.realm.delete(emotionForDeletion)
+                    let realm = try! Realm()
+                    try realm.write {
+                        realm.delete(emotionForDeletion.meals)
+                        realm.delete(emotionForDeletion)
                     }
                 } catch {
                     print("Error deletong emotion \(error)")
@@ -207,6 +209,7 @@ class EmotionTableViewController: UITableViewController, SwipeTableViewCellDeleg
     
     func updateEmotion(emotion: Emotion, newEmotionValue: Emotion){
         do{
+            let realm = try! Realm()
             try realm.write {
                 emotion.emoticon = newEmotionValue.emoticon
                 emotion.name = newEmotionValue.name
@@ -218,6 +221,7 @@ class EmotionTableViewController: UITableViewController, SwipeTableViewCellDeleg
     
     func saveEmotion(emotion: Emotion) {
         do{
+            let realm = try! Realm()
             try realm.write {
                 realm.add(emotion)
             }
