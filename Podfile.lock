@@ -2,6 +2,8 @@ PODS:
   - ChameleonFramework/Default (2.1.0)
   - ChameleonFramework/Swift (2.1.0):
     - ChameleonFramework/Default
+  - CustomPickerDialog-Swift (1.2.0)
+  - DatePickerDialog (2.0)
   - PickerViewCell (0.1.0)
   - Realm (3.15.0):
     - Realm/Headers (= 3.15.0)
@@ -12,6 +14,8 @@ PODS:
 
 DEPENDENCIES:
   - ChameleonFramework/Swift (from `https://github.com/ViccAlexander/Chameleon.git`)
+  - CustomPickerDialog-Swift (from `https://github.com/bruand81/CustomPickerDialog-Swift.git`)
+  - DatePickerDialog (from `https://github.com/bruand81/DatePickerDialog-iOS-Swift.git`)
   - PickerViewCell (from `https://github.com/bruand81/PickerViewCell.git`)
   - RealmSwift
   - SwipeCellKit
@@ -25,6 +29,10 @@ SPEC REPOS:
 EXTERNAL SOURCES:
   ChameleonFramework:
     :git: https://github.com/ViccAlexander/Chameleon.git
+  CustomPickerDialog-Swift:
+    :git: https://github.com/bruand81/CustomPickerDialog-Swift.git
+  DatePickerDialog:
+    :git: https://github.com/bruand81/DatePickerDialog-iOS-Swift.git
   PickerViewCell:
     :git: https://github.com/bruand81/PickerViewCell.git
 
@@ -32,17 +40,25 @@ CHECKOUT OPTIONS:
   ChameleonFramework:
     :commit: 6dd284bde21ea2e7f9fd89bc36f40df16e16369d
     :git: https://github.com/ViccAlexander/Chameleon.git
+  CustomPickerDialog-Swift:
+    :commit: a858c7be6ee686b3168c431f9bb1500be5911715
+    :git: https://github.com/bruand81/CustomPickerDialog-Swift.git
+  DatePickerDialog:
+    :commit: 8b422690a0a066e984406fbdf1311ea3a4dfdcc1
+    :git: https://github.com/bruand81/DatePickerDialog-iOS-Swift.git
   PickerViewCell:
     :commit: 9d62526efffd40fedc78737bf5f72ed562625728
     :git: https://github.com/bruand81/PickerViewCell.git
 
 SPEC CHECKSUMS:
   ChameleonFramework: d21a3cc247abfe5e37609a283a8238b03575cf64
+  CustomPickerDialog-Swift: 9096945acb7a768069fb772d5d25a67ea081d650
+  DatePickerDialog: 18b12e3aba09b28dc6146bdf8573a9834d8ea2ab
   PickerViewCell: 4e6987bc69348a11782d8a3f711a684b8a320e9b
   Realm: 9b834e1be6062f544805252c812348872dc5d4ed
   RealmSwift: 8a41886f8ab6efef9eb8df97de2f2bb911561a79
   SwipeCellKit: 935ca28c187ec6e1ffb2b578cf8ddca842bfdcbb
 
-PODFILE CHECKSUM: 7d6265cdee483777ce197535453f41723b950bcc
+PODFILE CHECKSUM: 640bec89b50bd5957a6ea02e2e23a5a19c8139e4
 
 COCOAPODS: 1.6.1

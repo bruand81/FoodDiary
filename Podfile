@@ -10,5 +10,7 @@ target 'Diario Alimentare' do
   pod 'SwipeCellKit'
   pod 'ChameleonFramework/Swift', :git => 'https://github.com/ViccAlexander/Chameleon.git'
   pod 'PickerViewCell', :git => 'https://github.com/bruand81/PickerViewCell.git'
+  pod 'DatePickerDialog', :git => 'https://github.com/bruand81/DatePickerDialog-iOS-Swift.git'
+  pod 'CustomPickerDialog-Swift', :git => 'https://github.com/bruand81/CustomPickerDialog-Swift.git'
 
 end

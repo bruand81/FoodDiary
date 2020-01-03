@@ -74,7 +74,7 @@ class MealDetailsTableViewController: UITableViewController {
         case SectionOfMealDetails.mealName.rawValue: //Meal name
             return 1
         case SectionOfMealDetails.mealEmotion.rawValue: //Meal emotion
-            return 1
+            return 2
         case SectionOfMealDetails.mealDate.rawValue: //Meal date
             return 1
         case SectionOfMealDetails.mealContent.rawValue: //Meal content
@@ -97,6 +97,11 @@ class MealDetailsTableViewController: UITableViewController {
                 cell.textLabel?.text = nameForMeal
                 return cell
             case SectionOfMealDetails.mealEmotion.rawValue: //Meal emotion
+                if indexPath.row == 1 {
+                    let cell = tableView.dequeueReusableCell(withIdentifier: "addEmotionCell", for: indexPath)
+                    cell.textLabel?.text = NSLocalizedString("Manage emotions", comment: "")
+                    return cell
+                }
                 let cell = tableView.dequeueReusableCell(withIdentifier: "emotionOfMealCell", for: indexPath)
                 indexPathForEmotion = indexPath
                 
@@ -399,13 +404,13 @@ class MealDetailsTableViewController: UITableViewController {
         
         delegate?.updatedMealDetails()
         self.navigationController?.popViewController(animated: true)
-        self.dismiss(animated: true, completion: nil)
+        //self.dismiss(animated: true, completion: nil)
     }
 
     @IBAction func doneButtonPressed(_ sender: UIBarButtonItem) {
         delegate?.updatedMealDetails()
         self.navigationController?.popViewController(animated: true)
-        self.dismiss(animated: true, completion: nil)
+        //self.dismiss(animated: true, completion: nil)
     }
 }
 

@@ -16,8 +16,11 @@
 		A51B973B228AAAC100C5118B /* MealDetailsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51B973A228AAAC100C5118B /* MealDetailsTableViewController.swift */; };
 		A51B973D228AC5E800C5118B /* Dish.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51B973C228AC5E800C5118B /* Dish.swift */; };
 		A53F7B91228EF6D400BDCF41 /* DatePickerViewCellWithToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53F7B90228EF6D400BDCF41 /* DatePickerViewCellWithToolbar.swift */; };
+		A5CFF8002294046B00D36DDB /* SwitchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5CFF7FE2294046B00D36DDB /* SwitchTableViewCell.swift */; };
+		A5CFF8012294046B00D36DDB /* SwitchTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A5CFF7FF2294046B00D36DDB /* SwitchTableViewCell.xib */; };
+		A5DC51622294330100451E33 /* CustomPickerDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5DC51612294330100451E33 /* CustomPickerDialog.swift */; };
 		A5E61DEE2285BBE300B14772 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E61DED2285BBE300B14772 /* AppDelegate.swift */; };
-		A5E61DF02285BBE300B14772 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E61DEF2285BBE300B14772 /* ViewController.swift */; };
+		A5E61DF02285BBE300B14772 /* ShareSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E61DEF2285BBE300B14772 /* ShareSettingsViewController.swift */; };
 		A5E61DF32285BBE300B14772 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A5E61DF12285BBE300B14772 /* Main.storyboard */; };
 		A5E61DF52285BBE900B14772 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A5E61DF42285BBE900B14772 /* Assets.xcassets */; };
 		A5E61DF82285BBE900B14772 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A5E61DF62285BBE900B14772 /* LaunchScreen.storyboard */; };
@@ -38,9 +41,12 @@
 		A51B973A228AAAC100C5118B /* MealDetailsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealDetailsTableViewController.swift; sourceTree = "<group>"; };
 		A51B973C228AC5E800C5118B /* Dish.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dish.swift; sourceTree = "<group>"; };
 		A53F7B90228EF6D400BDCF41 /* DatePickerViewCellWithToolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerViewCellWithToolbar.swift; sourceTree = "<group>"; };
+		A5CFF7FE2294046B00D36DDB /* SwitchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwitchTableViewCell.swift; sourceTree = "<group>"; };
+		A5CFF7FF2294046B00D36DDB /* SwitchTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SwitchTableViewCell.xib; sourceTree = "<group>"; };
+		A5DC51612294330100451E33 /* CustomPickerDialog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPickerDialog.swift; sourceTree = "<group>"; };
 		A5E61DEA2285BBE300B14772 /* Diario Alimentare.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Diario Alimentare.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5E61DED2285BBE300B14772 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		A5E61DEF2285BBE300B14772 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		A5E61DEF2285BBE300B14772 /* ShareSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareSettingsViewController.swift; sourceTree = "<group>"; };
 		A5E61DF22285BBE300B14772 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		A5E61DF42285BBE900B14772 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A5E61DF72285BBE900B14772 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -142,6 +148,7 @@
 			children = (
 				A5E61E0B2285C8A500B14772 /* CustomCells */,
 				A5E61DF12285BBE300B14772 /* Main.storyboard */,
+				A5DC51612294330100451E33 /* CustomPickerDialog.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -149,7 +156,7 @@
 		A5E61E022285BC4700B14772 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				A5E61DEF2285BBE300B14772 /* ViewController.swift */,
+				A5E61DEF2285BBE300B14772 /* ShareSettingsViewController.swift */,
 				A50C0F9422868941005EB843 /* MealTableViewController.swift */,
 				A50C0F962286899C005EB843 /* EmotionTableViewController.swift */,
 				A51B973A228AAAC100C5118B /* MealDetailsTableViewController.swift */,
@@ -164,6 +171,8 @@
 				A5E61E0D2285C8E000B14772 /* MealTableViewCell.xib */,
 				A50C0F9A22868B21005EB843 /* EmotionTableViewCell.swift */,
 				A50C0F9B22868B21005EB843 /* EmotionTableViewCell.xib */,
+				A5CFF7FE2294046B00D36DDB /* SwitchTableViewCell.swift */,
+				A5CFF7FF2294046B00D36DDB /* SwitchTableViewCell.xib */,
 			);
 			path = CustomCells;
 			sourceTree = "<group>";
@@ -232,6 +241,7 @@
 				A5E61DF82285BBE900B14772 /* LaunchScreen.storyboard in Resources */,
 				A50C0F9E2286CBEB005EB843 /* Localizable.strings in Resources */,
 				A5E61E0F2285C8E000B14772 /* MealTableViewCell.xib in Resources */,
+				A5CFF8012294046B00D36DDB /* SwitchTableViewCell.xib in Resources */,
 				A5E61DF52285BBE900B14772 /* Assets.xcassets in Resources */,
 				A5E61DF32285BBE300B14772 /* Main.storyboard in Resources */,
 				A50C0F9D22868B21005EB843 /* EmotionTableViewCell.xib in Resources */,
@@ -273,6 +283,8 @@
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Diario Alimentare/Pods-Diario Alimentare-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/ChameleonFramework/ChameleonFramework.framework",
+				"${BUILT_PRODUCTS_DIR}/CustomPickerDialog-Swift/CustomPickerDialog_Swift.framework",
+				"${BUILT_PRODUCTS_DIR}/DatePickerDialog/DatePickerDialog.framework",
 				"${BUILT_PRODUCTS_DIR}/PickerViewCell/PickerViewCell.framework",
 				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
 				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
@@ -283,6 +295,8 @@
 			);
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ChameleonFramework.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CustomPickerDialog_Swift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DatePickerDialog.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PickerViewCell.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
@@ -300,16 +314,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A5E61DF02285BBE300B14772 /* ViewController.swift in Sources */,
+				A5E61DF02285BBE300B14772 /* ShareSettingsViewController.swift in Sources */,
 				A51B973D228AC5E800C5118B /* Dish.swift in Sources */,
 				A5E61E082285C03B00B14772 /* Meal.swift in Sources */,
 				A50C0F9C22868B21005EB843 /* EmotionTableViewCell.swift in Sources */,
 				A5E61DEE2285BBE300B14772 /* AppDelegate.swift in Sources */,
+				A5CFF8002294046B00D36DDB /* SwitchTableViewCell.swift in Sources */,
 				A51B973B228AAAC100C5118B /* MealDetailsTableViewController.swift in Sources */,
 				A5E61E0A2285C29A00B14772 /* Emotion.swift in Sources */,
 				A50C0F9522868941005EB843 /* MealTableViewController.swift in Sources */,
 				A50C0F972286899C005EB843 /* EmotionTableViewController.swift in Sources */,
 				A5E61E0E2285C8E000B14772 /* MealTableViewCell.swift in Sources */,
+				A5DC51622294330100451E33 /* CustomPickerDialog.swift in Sources */,
 				A53F7B91228EF6D400BDCF41 /* DatePickerViewCellWithToolbar.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

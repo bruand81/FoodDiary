@@ -10,6 +10,7 @@ import UIKit
 import RealmSwift
 import SwipeCellKit
 
+
 struct MealDetailSection: Comparable {
     var month: Date
     var meals: [Meal]
@@ -63,7 +64,6 @@ class MealTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        emotionButton.title = "☺︎"
         
         tableView.register(UINib(nibName: "MealTableViewCell", bundle: nil), forCellReuseIdentifier: MealTableViewCell().reuseIdentifier ?? "customMealCell")
         tableView.rowHeight = 80.0
@@ -209,7 +209,38 @@ class MealTableViewController: UITableViewController {
     }
     
     @IBAction func goToEmotionsButtonPressed(_ sender: UIBarButtonItem) {
+        goToEmotion()
+    }
+    
+    func goToEmotion(){
         performSegue(withIdentifier: "goToEmotions", sender: self)
+    }
+    
+    func goToSettings() {
+        
+    }
+    
+    @IBAction func showMenuButtonPressed(_ sender: UIBarButtonItem) {
+        let actionSheet = UIAlertController(title: NSLocalizedString("Menu", comment: ""), message: "", preferredStyle: .actionSheet)
+        
+        let emotionAction = UIAlertAction(title: NSLocalizedString("Manage emotions", comment: ""), style: .default) { (action) in
+            self.goToEmotion()
+        }
+        
+        let settingsAction = UIAlertAction(title: NSLocalizedString("Settings", comment: ""), style: .default) { (action) in
+            self.goToSettings()
+        }
+        
+        let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel, handler: nil)
+        
+        actionSheet.addAction(emotionAction)
+        actionSheet.addAction(settingsAction)
+        actionSheet.addAction(cancelAction)
+        
+        present(actionSheet, animated: true, completion: nil)
+    }
+    
+    @IBAction func shareButtonPressed(_ sender: UIBarButtonItem) {
     }
     
 }
