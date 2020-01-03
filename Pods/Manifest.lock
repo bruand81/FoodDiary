@@ -3,17 +3,17 @@ PODS:
   - ChameleonFramework/Swift (2.1.0):
     - ChameleonFramework/Default
   - PickerViewCell (0.1.0)
-  - Realm (3.20.0):
-    - Realm/Headers (= 3.20.0)
-  - Realm/Headers (3.20.0)
-  - RealmSwift (3.20.0):
-    - Realm (= 3.20.0)
-  - SwipeCellKit (2.6.0)
+  - Realm (4.3.0):
+    - Realm/Headers (= 4.3.0)
+  - Realm/Headers (4.3.0)
+  - RealmSwift (4.3.0):
+    - Realm (= 4.3.0)
+  - SwipeCellKit (2.7.1)
 
 DEPENDENCIES:
   - ChameleonFramework/Swift (from `https://github.com/luckychris/Chameleon.git`)
   - PickerViewCell (from `https://github.com/bruand81/PickerViewCell.git`)
-  - RealmSwift (~> 3.20.0)
+  - RealmSwift
   - SwipeCellKit
 
 SPEC REPOS:
@@ -39,10 +39,10 @@ CHECKOUT OPTIONS:
 SPEC CHECKSUMS:
   ChameleonFramework: d21a3cc247abfe5e37609a283a8238b03575cf64
   PickerViewCell: 4e6987bc69348a11782d8a3f711a684b8a320e9b
-  Realm: 8b2ca5bc6479a91f379b6b42b5922e396cd5ba5a
-  RealmSwift: 1949ef26a279e1845bd51d591b9103adfcd121df
-  SwipeCellKit: 935ca28c187ec6e1ffb2b578cf8ddca842bfdcbb
+  Realm: 9357c3589555793e1860a7104a7412bca4a48d99
+  RealmSwift: 402f1e379a8ef82c635313037b043f0f06de880c
+  SwipeCellKit: 3972254a826da74609926daf59b08d6c72e619ea
 
-PODFILE CHECKSUM: 6637312108ba29048df6a76e47d09cf428896f67
+PODFILE CHECKSUM: 67e09ca0c54f993faa0630bf50f2c76a89815392
 
 COCOAPODS: 1.8.4

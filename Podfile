@@ -6,7 +6,8 @@ target 'Diario Alimentare' do
   use_frameworks!
 
   # Pods for Diario Alimentare
-  pod 'RealmSwift', '~> 3.20.0'
+  # pod 'RealmSwift', '~> 3.20.0'
+  pod 'RealmSwift'
   pod 'SwipeCellKit'
   pod 'ChameleonFramework/Swift', :git => 'https://github.com/luckychris/Chameleon.git'
   pod 'PickerViewCell', :git => 'https://github.com/bruand81/PickerViewCell.git'
