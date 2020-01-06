@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import ChameleonFramework
+//import ChameleonFramework
 import PickerViewCell
 import RealmSwift
 
@@ -33,8 +33,13 @@ class MealDetailsTableViewController: UITableViewController {
     var duplicateExitBarrier: Bool = false
     var duplicateDatePickerExitBarrier: Bool = false
     var delegate: MealDetailDelegate?
+    var measureUnitPicker: UIPickerView = UIPickerView()
+    let toolBar = UIToolbar()
+    var measureUnitTextField = UITextField()
+    var measureUnitSelected: MeasureUnit?
     
     lazy var emotions: Results<Emotion> = realm.objects(Emotion.self).sorted(byKeyPath: "name", ascending: true)
+    lazy var measureUnits: Results<MeasureUnit> = realm.objects(MeasureUnit.self).sorted(byKeyPath: "name", ascending: true)
     private var _isUpdate = true
     
     fileprivate lazy var dateFormatter: DateFormatter = {
@@ -54,6 +59,8 @@ class MealDetailsTableViewController: UITableViewController {
             _isUpdate = false
             return
         }
+        
+        tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -91,7 +98,8 @@ class MealDetailsTableViewController: UITableViewController {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "mealNameCell", for: indexPath)
                 guard let nameForMeal = meal?.name else {
                     cell.textLabel?.text = NSLocalizedString("Set meal name", comment: "")
-                    cell.textLabel?.textColor = FlatGray()
+                    //cell.textLabel?.textColor = FlatGray()
+                    cell.textLabel?.textColor = UIColor.lightGray
                     return cell
                 }
                 cell.textLabel?.text = nameForMeal
@@ -131,7 +139,15 @@ class MealDetailsTableViewController: UITableViewController {
                     return configureForAddMeal(cell: cell)
                 }
                 
-                cell.textLabel?.text = dishesForMeal[indexPath.row].name
+                let dish = dishesForMeal[indexPath.row]
+                
+                var dishQuantity = ""
+                
+                if dish.quantity > 0 {
+                    dishQuantity = " (\(dish.quantity) \(dish.measureUnitForDishes.first?.name ?? "NN"))"
+                }
+                let dishName = "\(dish.name)\(dishQuantity)"
+                cell.textLabel?.text = dishName
                 
                 return cell
             default:
@@ -198,40 +214,74 @@ class MealDetailsTableViewController: UITableViewController {
             
             present(alert, animated: true, completion: nil)
         } else if indexPath.section == SectionOfMealDetails.mealContent.rawValue {
-            guard let cell = tableView.cellForRow(at: indexPath) else {return}
-            if indexPath.row > meal!.dishes.count || meal!.dishes.count == 0{
-                return addNewDish()
+            guard tableView.cellForRow(at: indexPath) != nil else {return}
+            if indexPath.row >= meal!.dishes.count || meal!.dishes.count == 0{
+                addOrEditDish(indexPath: nil)
             } else {
-                var textField = UITextField()
-                
-                let alert = UIAlertController(title: NSLocalizedString("Modify new dish", comment: ""), message: "Modify the selected dishes for this meal", preferredStyle: .alert)
-                
-                let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel, handler: nil)
-                
-                let action = UIAlertAction(title: NSLocalizedString("Modify Dish", comment: ""), style: .default) { (action) in
-                    //What will happen when the user clicks the Add Button on our UIAlert
-                    if let addDishText = textField.text {
-                        do {
-                            try self.realm.write {
-                                self.meal!.dishes[indexPath.row].name = addDishText
-                            }
-                        } catch {
-                            print("Error updating new dish \(error)")
-                        }
-                        
-                        self.tableView.reloadData()
-                    }
-                }
-                
-                alert.addTextField { (alertTextField) in
-                    alertTextField.text = cell.textLabel?.text
-                    textField = alertTextField
-                }
-                
-                alert.addAction(action)
-                alert.addAction(cancelAction)
-                
-                present(alert, animated: true, completion: nil)
+                addOrEditDish(indexPath: indexPath)
+//                var dishNameTextField = UITextField()
+//                var quantityTextField = UITextField()
+//                let dish = meal!.dishes[indexPath.row]
+//                measureUnitSelected = dish.measureUnitForDishes.first
+//
+//                //quantityTextField.keyboardType = .numberPad
+//
+//                let alert = UIAlertController(title: NSLocalizedString("Modify new dish", comment: ""), message: "Modify the selected dishes for this meal", preferredStyle: .alert)
+//
+//                let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel, handler: nil)
+//
+//                let action = UIAlertAction(title: NSLocalizedString("Modify Dish", comment: ""), style: .default) { (action) in
+//                    //What will happen when the user clicks the Add Button on our UIAlert
+//                    if let addDishText = dishNameTextField.text {
+//                        let quantity = Int(quantityTextField.text ?? "-1") ?? -1
+//                        print(addDishText)
+//                        print(quantity)
+//                        print(self.measureUnitSelected?.name ?? "None")
+//
+//                        do {
+//                            try self.realm.write {
+//                                self.meal!.dishes[indexPath.row].name = addDishText
+//                                self.meal!.dishes[indexPath.row].quantity = quantity
+//                                for mu in self.meal!.dishes[indexPath.row].measureUnitForDishes {
+//                                    if let index = mu.dishes.firstIndex(of: self.meal!.dishes[indexPath.row]){
+//                                        mu.dishes.remove(at: index)
+//                                    }
+//                                }
+//                                self.measureUnitSelected?.dishes.append(self.meal!.dishes[indexPath.row])
+//                            }
+//                        } catch {
+//                            print("Error updating new dish \(error)")
+//                        }
+//
+//                        self.tableView.reloadData()
+//                    }
+//                }
+//
+//                alert.addTextField { (alertTextField) in
+//                    //alertTextField.text = cell.textLabel?.text
+//                    alertTextField.text = dish.name
+//                    dishNameTextField = alertTextField
+//                }
+//
+//                alert.addTextField { (alertTextField) in
+//                    alertTextField.text = "\(dish.quantity)"
+//                    alertTextField.keyboardType = .numberPad
+//                    quantityTextField = alertTextField
+//                    //quantity = Int(alertTextField.text ?? "-1") ?? -1
+//                }
+//
+//                alert.addTextField { (alertTextField) in
+//                    alertTextField.text = self.measureUnitSelected?.name
+//                    self.doMeasureUnitPicker()
+//                    alertTextField.inputView = self.measureUnitPicker
+//                    alertTextField.inputAccessoryView = self.toolBar
+//                    self.measureUnitTextField = alertTextField
+//                }
+//
+//                alert.addAction(action)
+//                alert.addAction(cancelAction)
+//
+//                present(alert, animated: true, completion: nil)
             }
         } else if let cell = tableView.cellForRow(at: indexPath) {
             if !cell.isFirstResponder {
@@ -239,6 +289,133 @@ class MealDetailsTableViewController: UITableViewController {
             }
         }
     }
+    
+    func addOrEditDish(indexPath idx: IndexPath?) {
+        var dishNameTextField = UITextField()
+        var quantityTextField = UITextField()
+        var dish = Dish()
+        var alertTitle = ""
+        var actionButtonTitle = ""
+        
+        if let indexPath = idx {
+            dish = meal!.dishes[indexPath.row]
+            measureUnitSelected = dish.measureUnitForDishes.first
+            alertTitle = "Modify new dish"
+            actionButtonTitle = "Modify Dish"
+        } else {
+            dish.name = ""
+            dish.quantity = -1
+            alertTitle = "Add new dish"
+            actionButtonTitle = "Add Dish"
+        }
+        measureUnitSelected = dish.measureUnitForDishes.first ?? measureUnits.filter(NSPredicate(format: "name = %@", "NN")).first
+        
+        //quantityTextField.keyboardType = .numberPad
+        
+        let alert = UIAlertController(title: NSLocalizedString(alertTitle, comment: ""), message: NSLocalizedString("Modify the selected dishes for this meal", comment: ""), preferredStyle: .alert)
+        
+        let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel, handler: nil)
+        
+        let action = UIAlertAction(title: NSLocalizedString(actionButtonTitle, comment: ""), style: .default) { (action) in
+            //What will happen when the user clicks the Add Button on our UIAlert
+            if let addDishText = dishNameTextField.text {
+                let quantity = Int(quantityTextField.text ?? "-1") ?? -1
+//                print(addDishText)
+//                print(quantity)
+//                print(self.measureUnitSelected?.name ?? "None")
+                if let indexPath = idx {
+                    do {
+                        try self.realm.write {
+                            self.meal!.dishes[indexPath.row].name = addDishText
+                            self.meal!.dishes[indexPath.row].quantity = quantity
+                            for mu in self.meal!.dishes[indexPath.row].measureUnitForDishes {
+                                if let index = mu.dishes.firstIndex(of: self.meal!.dishes[indexPath.row]){
+                                    mu.dishes.remove(at: index)
+                                }
+                            }
+                            self.measureUnitSelected?.dishes.append(self.meal!.dishes[indexPath.row])
+                        }
+                    } catch {
+                        print("Error updating new dish \(error)")
+                    }
+                } else {
+                    dish.name = addDishText
+                    dish.quantity = quantity
+                    
+                    do {
+                        try self.realm.write {
+                            self.meal?.dishes.append(dish)
+                            self.measureUnitSelected?.dishes.append(dish)
+                        }
+                    } catch {
+                        print("Error adding new dish \(error)")
+                    }
+                }
+                
+                self.tableView.reloadData()
+            }
+        }
+        
+        alert.addTextField { (alertTextField) in
+            //alertTextField.text = cell.textLabel?.text
+            alertTextField.text = dish.name
+            dishNameTextField = alertTextField
+        }
+        
+        alert.addTextField { (alertTextField) in
+            alertTextField.text = "\(dish.quantity)"
+            alertTextField.keyboardType = .numberPad
+            quantityTextField = alertTextField
+            //quantity = Int(alertTextField.text ?? "-1") ?? -1
+        }
+        
+        alert.addTextField { (alertTextField) in
+            alertTextField.text = self.measureUnitSelected?.name
+            self.doMeasureUnitPicker()
+            alertTextField.inputView = self.measureUnitPicker
+            alertTextField.inputAccessoryView = self.toolBar
+            self.measureUnitTextField = alertTextField
+        }
+        
+        alert.addAction(action)
+        alert.addAction(cancelAction)
+        
+        present(alert, animated: true, completion: nil)
+    }
+    
+//    func addNewDish(){
+//        var textField = UITextField()
+//
+//        let alert = UIAlertController(title: NSLocalizedString("Add new dish", comment: ""), message: "Add a new dishes for this meal", preferredStyle: .alert)
+//
+//        let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel, handler: nil)
+//        let action = UIAlertAction(title: NSLocalizedString("Add Dish", comment: ""), style: .default) { (action) in
+//            //What will happen when the user clicks the Add Button on our UIAlert
+//            if let addDishText = textField.text {
+//                let newDish = Dish()
+//                newDish.name = addDishText
+//                do {
+//                    try self.realm.write {
+//                        self.meal?.dishes.append(newDish)
+//                    }
+//                } catch {
+//                    print("Error inserting new dish \(error)")
+//                }
+//
+//                self.tableView.reloadData()
+//            }
+//        }
+//
+//        alert.addTextField { (alertTextField) in
+//            alertTextField.placeholder = NSLocalizedString("Dish content", comment: "")
+//            textField = alertTextField
+//        }
+//
+//        alert.addAction(action)
+//        alert.addAction(cancelAction)
+//
+//        present(alert, animated: true, completion: nil)
+//    }
     
     @objc func dismissPicker() {
         
@@ -248,7 +425,8 @@ class MealDetailsTableViewController: UITableViewController {
     
     func defaultCellValueForEmotionCell(cell: UITableViewCell, message: String) -> UITableViewCell {
         cell.textLabel?.text = message
-        cell.textLabel?.textColor = FlatGray()
+        //cell.textLabel?.textColor = FlatGray()
+        cell.textLabel?.textColor = UIColor.lightText
         return cell
     }
     
@@ -290,12 +468,13 @@ class MealDetailsTableViewController: UITableViewController {
     
     func configureForAddMeal(cell: UITableViewCell) -> UITableViewCell {
         cell.textLabel?.text = NSLocalizedString("Add dishes", comment: "")
+        cell.textLabel?.textColor = UIColor.lightGray
         return cell
     }
     
-    @objc func addDishesToDishesTableButtonPressed(){
+    /*@objc func addDishesToDishesTableButtonPressed(){
         
-    }
+    }*/
 
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
@@ -320,43 +499,10 @@ class MealDetailsTableViewController: UITableViewController {
             }
             tableView.reloadData()
         } else if editingStyle == .insert {
-            addNewDish()
+            addOrEditDish(indexPath: nil)
         }
     }
 
-    func addNewDish(){
-        var textField = UITextField()
-        
-        let alert = UIAlertController(title: NSLocalizedString("Add new dish", comment: ""), message: "Add a new dishes for this meal", preferredStyle: .alert)
-        
-        let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel, handler: nil)
-        let action = UIAlertAction(title: NSLocalizedString("Add Dish", comment: ""), style: .default) { (action) in
-            //What will happen when the user clicks the Add Button on our UIAlert
-            if let addDishText = textField.text {
-                let newDish = Dish()
-                newDish.name = addDishText
-                do {
-                    try self.realm.write {
-                        self.meal?.dishes.append(newDish)
-                    }
-                } catch {
-                    print("Error inserting new dish \(error)")
-                }
-                
-                self.tableView.reloadData()
-            }
-        }
-        
-        alert.addTextField { (alertTextField) in
-            alertTextField.placeholder = NSLocalizedString("Dish content", comment: "")
-            textField = alertTextField
-        }
-        
-        alert.addAction(action)
-        alert.addAction(cancelAction)
-        
-        present(alert, animated: true, completion: nil)
-    }
     /*
     // Override to support rearranging the table view.
     override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
@@ -407,6 +553,46 @@ class MealDetailsTableViewController: UITableViewController {
         self.navigationController?.popViewController(animated: true)
         self.dismiss(animated: true, completion: nil)
     }
+    @IBAction func goToMeasureUnitButtonPressed(_ sender: UIBarButtonItem) {
+        performSegue(withIdentifier: "goToMeasureUnit", sender: self)
+    }
+    
+    // MARK: - Measure Unit Picker utility methods
+    func doMeasureUnitPicker(){
+        self.measureUnitPicker = UIPickerView(frame:CGRect(x: 0, y: self.view.frame.size.height - 220, width:self.view.frame.size.width, height: 216))
+        //self.measureUnitPicker.backgroundColor = UIColor.white
+        self.measureUnitPicker.dataSource = self
+        self.measureUnitPicker.delegate = self
+        if let mu = measureUnitSelected {
+            self.measureUnitPicker.selectRow(measureUnits.index(of: mu) ?? 0, inComponent: 0, animated: true)
+            self.measureUnitTextField.text = mu.name
+        }
+        
+        toolBar.barStyle = .default
+        toolBar.isTranslucent = true
+        // toolBar.tintColor = UIColor(red: 92/255, green: 216/255, blue: 255/255, alpha: 1)
+        toolBar.sizeToFit()
+        
+        // Adding Button ToolBar
+        let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(MealDetailsTableViewController.doneClick))
+        let spaceButton = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        let cancelButton = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(MealDetailsTableViewController.cancelClick))
+        toolBar.setItems([cancelButton, spaceButton, doneButton], animated: true)
+        toolBar.isUserInteractionEnabled = true
+
+        self.toolBar.isHidden = false
+    }
+    
+    @objc func doneClick() {
+        measureUnitPicker.isHidden = true
+        self.toolBar.isHidden = true
+    }
+    
+    @objc func cancelClick() {
+        measureUnitPicker   .isHidden = true
+        self.toolBar.isHidden = true
+    }
+    
 }
 
 // MARK: - DatePickerTableCellDelegate
@@ -415,7 +601,8 @@ extension MealDetailsTableViewController : DatePickerTableCellDelegate{
         guard let dateCell = tableView.cellForRow(at: indexPathForDate!) else {return}
         duplicateDatePickerExitBarrier = false
         cell.picker.date = dateFormatter.date(from: dateCell.textLabel!.text!) ?? Date()
-        cell.textLabel?.textColor = FlatRedDark()
+        //cell.textLabel?.textColor = FlatRedDark()
+        cell.textLabel?.textColor = UIColor.red
     }
     
     func onDatePickerClose(_ cell: DatePickerTableViewCell) {
@@ -432,7 +619,7 @@ extension MealDetailsTableViewController : DatePickerTableCellDelegate{
         } catch {
             print("error updating meal \(error)")
         }
-        cell.textLabel?.textColor = FlatBlack()
+        cell.textLabel?.textColor = UIColor.black
         _ = cell.resignFirstResponder()
         tableView.reloadData()
     }
@@ -467,7 +654,7 @@ extension MealDetailsTableViewController : PickerTableCellDelegate, PickerTableC
     func onPickerOpen(_ cell: PickerTableViewCell) {
         guard let emotionCell = tableView.cellForRow(at: indexPathForEmotion!) else {return}
         duplicateExitBarrier = false
-        emotionCell.textLabel?.textColor = FlatRedDark()
+        emotionCell.textLabel?.textColor = UIColor.red
         if let emotionLabelText = emotionCell.textLabel?.text {
             let emotionText = emotionLabelText.toLengthOf(length: 2)
 //            emotionSubStringText.remove(at: emotionSubStringText.startIndex)
@@ -485,7 +672,7 @@ extension MealDetailsTableViewController : PickerTableCellDelegate, PickerTableC
         }
         guard let emotionCell = tableView.cellForRow(at: indexPathForEmotion!) else {return}
         duplicateExitBarrier = true
-        emotionCell.textLabel?.textColor = FlatBlack()
+        emotionCell.textLabel?.textColor = UIColor.black
         guard let currentMeal = meal, let emotion = emotionForMeal else {return}
 
         do {
@@ -526,5 +713,25 @@ extension String {
         } else {
             return ""
         }
+    }
+}
+
+extension MealDetailsTableViewController : UIPickerViewDataSource, UIPickerViewDelegate {
+    
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return measureUnits.count
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return measureUnits[row].name
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        measureUnitTextField.text = measureUnits[row].name
+        measureUnitSelected = measureUnits[row]
     }
 }

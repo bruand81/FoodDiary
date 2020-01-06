@@ -16,3 +16,6 @@
 
 /* Class = "UINavigationItem"; title = "Meal"; ObjectID = "OF1-zX-sMh"; */
 "OF1-zX-sMh.title" = "Pasto";
+
+/* Class = "UINavigationItem"; title = "Measure Unit"; ObjectID = "0Gn-ab-Flg"; */
+"0Gn-ab-Flg.title" = "Unità di misura";

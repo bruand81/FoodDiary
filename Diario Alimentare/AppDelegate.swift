@@ -21,6 +21,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         print(Realm.Configuration.defaultConfiguration.fileURL!)
         
         do {
+            let config = Realm.Configuration(
+            // Set the new schema version. This must be greater than the previously used
+            // version (if you've never set a schema version before, the version is 0).
+            schemaVersion: 2,
+
+            // Set the block which will be called automatically when opening a Realm with
+            // a schema version lower than the one set above
+            migrationBlock: { migration, oldSchemaVersion in
+                // We haven’t migrated anything yet, so oldSchemaVersion == 0
+                if (oldSchemaVersion < 1) {
+                    migration.enumerateObjects(ofType: Dish.className()) { (oldObject, newObject) in
+                        newObject!["quantity"] = -1
+                    }
+                }
+            })
+            
+            Realm.Configuration.defaultConfiguration = config
+            
             let realm = try Realm()
             let emotions = realm.objects(Emotion.self)
             
@@ -48,11 +66,46 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     realm.add(disgustEmotion)
                 }
             }
+            
+            let measureUnits = realm.objects(MeasureUnit.self)
+            
+            if measureUnits.count < 1 {
+                let nn = MeasureUnit()
+                nn.name = NSLocalizedString("NN", comment: "Measure unit not needed")
+                let ml = MeasureUnit()
+                ml.name = NSLocalizedString("ml", comment: "Measure unit milliliters")
+                let pz = MeasureUnit()
+                pz.name = NSLocalizedString("pz", comment: "Measure unit pieces")
+                let gr = MeasureUnit()
+                gr.name = NSLocalizedString("gr", comment: "Measure unit grams")
+                try realm.write {
+                    realm.add(nn)
+                    realm.add(ml)
+                    realm.add(pz)
+                    realm.add(gr)
+                }
+            }
+            
+            let predicate = NSPredicate(format: "name = %@", "NN")
+            let nnmu = realm.objects(MeasureUnit.self).filter(predicate).first
+            //print(nnmu ?? "Not present")
+            let dishes = realm.objects(Dish.self)
+            
+            if dishes.count > 0 {
+                for dish in dishes {
+                    //print(dish)
+                    if dish.measureUnitForDishes.count < 1 {
+                        try realm.write {
+                            nnmu?.dishes.append(dish)
+                        }
+                    }
+                }
+            }
         } catch {
             print("Error initialising \(error)")
         }
         
-        Chameleon.setGlobalThemeUsingPrimaryColor(UIColor.flatBlue(), with: UIContentStyle.light)
+        //Chameleon.setGlobalThemeUsingPrimaryColor(UIColor.flatBlue(), with: UIContentStyle.light)
         
         return true
     }

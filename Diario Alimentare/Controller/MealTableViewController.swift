@@ -9,7 +9,6 @@
 import UIKit
 import RealmSwift
 import SwipeCellKit
-import ChameleonFramework
 
 struct MealDetailSection: Comparable {
     var month: Date
@@ -50,7 +49,7 @@ fileprivate func firstDayOfMonth(date : Date) -> Date {
 
 class MealTableViewController: UITableViewController {
     @IBOutlet weak var emotionButton: UIBarButtonItem!
-    let realm = try! Realm()
+    // let realm = try! Realm()
     var meals: Results<Meal>?
     var createNewMeal = false
     var sections = [MealDetailSection]()
@@ -64,7 +63,7 @@ class MealTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        emotionButton.title = "☺︎"
+        //emotionButton.title = "☺︎"
         
         tableView.register(UINib(nibName: "MealTableViewCell", bundle: nil), forCellReuseIdentifier: MealTableViewCell().reuseIdentifier ?? "customMealCell")
         tableView.rowHeight = 80.0
@@ -75,14 +74,15 @@ class MealTableViewController: UITableViewController {
             let navBarAppearance = UINavigationBarAppearance()
             navBarAppearance.configureWithOpaqueBackground()
             navBarAppearance.backgroundColor = UIColor.flatBlue()
-            navBarAppearance.titleTextAttributes = [.foregroundColor: ContrastColorOf(navBarAppearance.backgroundColor ?? UIColor.flatBlue(), returnFlat: true)]
+            // navBarAppearance.titleTextAttributes = [.foregroundColor: ContrastColorOf(navBarAppearance.backgroundColor ?? UIColor.flatBlue(), returnFlat: true)]
             navBarAppearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
             navigationController?.navigationBar.standardAppearance = navBarAppearance
             navigationController?.navigationBar.scrollEdgeAppearance = navBarAppearance
         }
         
         loadMeals()
-
+        
+        tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -90,7 +90,7 @@ class MealTableViewController: UITableViewController {
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
     
-    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+    /*override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
         
         if #available(iOS 13.0, *) {
@@ -98,15 +98,15 @@ class MealTableViewController: UITableViewController {
             
             if hasUserInterfaceStyleChanged {
                 let userInterfaceStyle = traitCollection.userInterfaceStyle
-                if userInterfaceStyle == .dark {
+                /*if userInterfaceStyle == .dark {
                     Chameleon.setGlobalThemeUsingPrimaryColor(UIColor.flatBlue(), with: UIContentStyle.dark)
                 } else {
                     Chameleon.setGlobalThemeUsingPrimaryColor(UIColor.flatBlue(), with: UIContentStyle.light)
-                }
+                }*/
             }
         }
         
-    }
+    }*/
 
     // MARK: - Table view data source
 
@@ -132,11 +132,19 @@ class MealTableViewController: UITableViewController {
         cell.emoticonForMeal.text = meal.emotionForMeal.first?.emoticon
         cell.dateOfTheMealLabel.text = "\(meal.name) - \(dateFormatter.string(from: meal.when))"
         cell.whatForMealLabel.text = meal.dishes.map({ (dish) -> String in
-            return dish.name
+            var dishQuantity = ""
+            
+            if dish.quantity > 0 {
+                dishQuantity = " (\(dish.quantity) \(dish.measureUnitForDishes.first?.name ?? "NN"))"
+            }
+            let dishName = "\(dish.name)\(dishQuantity)"
+            
+            return dishName
         }).joined(separator: ", ")
         
         return cell
     }
+
     
     func defaultCell(cell: MealTableViewCell) -> MealTableViewCell {
         cell.emoticonForMeal.text="❌"
@@ -220,6 +228,7 @@ class MealTableViewController: UITableViewController {
     */
     
     func loadMeals() {
+        let realm = try! Realm()
         let startDate = firstDayOfMonth(date: Date(timeInterval: TimeInterval(floatLiteral: -1*3*30*24*60*60), since: Date()))
         meals = realm.objects(Meal.self).filter("when >= %@", startDate).sorted(byKeyPath: "when", ascending: true)
 //        let groups = Dictionary(grouping: self.meals!) { (meal) in
@@ -243,6 +252,10 @@ class MealTableViewController: UITableViewController {
         performSegue(withIdentifier: "goToEmotions", sender: self)
     }
     
+    @IBAction func goToMeasureUnitButtonPressed(_ sender: UIBarButtonItem) {
+        performSegue(withIdentifier: "goToMeasureUnit", sender: self)
+    }
+    
 }
 // MARK: - SwipeCellKit methods
 extension MealTableViewController: SwipeTableViewCellDelegate {
@@ -252,9 +265,10 @@ extension MealTableViewController: SwipeTableViewCellDelegate {
         let deleteAction = SwipeAction(style: .destructive, title: "Delete") { action, indexPath in
             let mealForDeletion = self.sections[indexPath.section].meals[indexPath.row]
             do{
-                try self.realm.write {
-                    self.realm.delete(mealForDeletion.dishes)
-                    self.realm.delete(mealForDeletion)
+                let realm = try! Realm()
+                try realm.write {
+                    realm.delete(mealForDeletion.dishes)
+                    realm.delete(mealForDeletion)
                 }
             } catch {
                 print("Error deleting meal \(error)")

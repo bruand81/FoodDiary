@@ -13,6 +13,8 @@ class Dish: Object {
     @objc dynamic private var _id: String = UUID().uuidString
     @objc dynamic var name = ""
     var mealForDish = LinkingObjects<Meal>(fromType: Meal.self, property: "dishes")
+    @objc dynamic var quantity = -1
+    var measureUnitForDishes = LinkingObjects<MeasureUnit>(fromType: MeasureUnit.self, property: "dishes")
     
     override static func primaryKey() -> String? {
         return "_id"
