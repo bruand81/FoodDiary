@@ -93,7 +93,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
             if dishes.count > 0 {
                 for dish in dishes {
-                    print(dish)
+                    //print(dish)
                     if dish.measureUnitForDishes.count < 1 {
                         try realm.write {
                             nnmu?.dishes.append(dish)
@@ -105,7 +105,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             print("Error initialising \(error)")
         }
         
-        Chameleon.setGlobalThemeUsingPrimaryColor(UIColor.flatBlue(), with: UIContentStyle.light)
+        //Chameleon.setGlobalThemeUsingPrimaryColor(UIColor.flatBlue(), with: UIContentStyle.light)
         
         return true
     }

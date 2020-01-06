@@ -9,7 +9,6 @@
 import UIKit
 import RealmSwift
 import SwipeCellKit
-import ChameleonFramework
 
 struct MealDetailSection: Comparable {
     var month: Date
@@ -64,7 +63,7 @@ class MealTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        emotionButton.title = "☺︎"
+        //emotionButton.title = "☺︎"
         
         tableView.register(UINib(nibName: "MealTableViewCell", bundle: nil), forCellReuseIdentifier: MealTableViewCell().reuseIdentifier ?? "customMealCell")
         tableView.rowHeight = 80.0
@@ -75,14 +74,15 @@ class MealTableViewController: UITableViewController {
             let navBarAppearance = UINavigationBarAppearance()
             navBarAppearance.configureWithOpaqueBackground()
             navBarAppearance.backgroundColor = UIColor.flatBlue()
-            navBarAppearance.titleTextAttributes = [.foregroundColor: ContrastColorOf(navBarAppearance.backgroundColor ?? UIColor.flatBlue(), returnFlat: true)]
+            // navBarAppearance.titleTextAttributes = [.foregroundColor: ContrastColorOf(navBarAppearance.backgroundColor ?? UIColor.flatBlue(), returnFlat: true)]
             navBarAppearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
             navigationController?.navigationBar.standardAppearance = navBarAppearance
             navigationController?.navigationBar.scrollEdgeAppearance = navBarAppearance
         }
         
         loadMeals()
-
+        
+        tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -90,7 +90,7 @@ class MealTableViewController: UITableViewController {
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
     
-    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+    /*override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
         
         if #available(iOS 13.0, *) {
@@ -98,15 +98,15 @@ class MealTableViewController: UITableViewController {
             
             if hasUserInterfaceStyleChanged {
                 let userInterfaceStyle = traitCollection.userInterfaceStyle
-                if userInterfaceStyle == .dark {
+                /*if userInterfaceStyle == .dark {
                     Chameleon.setGlobalThemeUsingPrimaryColor(UIColor.flatBlue(), with: UIContentStyle.dark)
                 } else {
                     Chameleon.setGlobalThemeUsingPrimaryColor(UIColor.flatBlue(), with: UIContentStyle.light)
-                }
+                }*/
             }
         }
         
-    }
+    }*/
 
     // MARK: - Table view data source
 
@@ -132,11 +132,19 @@ class MealTableViewController: UITableViewController {
         cell.emoticonForMeal.text = meal.emotionForMeal.first?.emoticon
         cell.dateOfTheMealLabel.text = "\(meal.name) - \(dateFormatter.string(from: meal.when))"
         cell.whatForMealLabel.text = meal.dishes.map({ (dish) -> String in
-            return dish.name
+            var dishQuantity = ""
+            
+            if dish.quantity > 0 {
+                dishQuantity = " (\(dish.quantity) \(dish.measureUnitForDishes.first?.name ?? "NN"))"
+            }
+            let dishName = "\(dish.name)\(dishQuantity)"
+            
+            return dishName
         }).joined(separator: ", ")
         
         return cell
     }
+
     
     func defaultCell(cell: MealTableViewCell) -> MealTableViewCell {
         cell.emoticonForMeal.text="❌"
@@ -242,6 +250,10 @@ class MealTableViewController: UITableViewController {
     
     @IBAction func goToEmotionsButtonPressed(_ sender: UIBarButtonItem) {
         performSegue(withIdentifier: "goToEmotions", sender: self)
+    }
+    
+    @IBAction func goToMeasureUnitButtonPressed(_ sender: UIBarButtonItem) {
+        performSegue(withIdentifier: "goToMeasureUnit", sender: self)
     }
     
 }

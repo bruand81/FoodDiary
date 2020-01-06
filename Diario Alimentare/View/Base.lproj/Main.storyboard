@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="rNM-Ss-vy3">
-    <device id="retina5_9" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="rNM-Ss-vy3">
+    <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -19,10 +17,10 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="mealCell" id="uXt-VP-ApA" customClass="MealTableViewCell" customModule="Diario_Alimentare" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="28" width="375" height="43.666667938232422"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="uXt-VP-ApA" id="lhw-cS-lKb">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.666666666666664"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.666667938232422"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -33,11 +31,18 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Food Diary" id="jCY-4J-4gm">
-                        <barButtonItem key="leftBarButtonItem" title="Item" id="eLL-K7-aV3">
-                            <connections>
-                                <action selector="goToEmotionsButtonPressed:" destination="YvT-5L-8Pb" id="Ke2-6N-Kzb"/>
-                            </connections>
-                        </barButtonItem>
+                        <leftBarButtonItems>
+                            <barButtonItem title="☺︎" image="emoji-icon" id="eLL-K7-aV3">
+                                <connections>
+                                    <action selector="goToEmotionsButtonPressed:" destination="YvT-5L-8Pb" id="Ke2-6N-Kzb"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem title="MeasureUnit" image="meter-icon" id="mxp-vW-jrw">
+                                <connections>
+                                    <action selector="goToMeasureUnitButtonPressed:" destination="YvT-5L-8Pb" id="jNF-Ka-SGE"/>
+                                </connections>
+                            </barButtonItem>
+                        </leftBarButtonItems>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="gZR-gk-jCc">
                             <connections>
                                 <action selector="addMealButtonPressed:" destination="YvT-5L-8Pb" id="gyw-UD-ewH"/>
@@ -48,6 +53,7 @@
                         <outlet property="emotionButton" destination="eLL-K7-aV3" id="oDc-oS-zcL"/>
                         <segue destination="JIz-0z-8GU" kind="show" identifier="goToEmotions" id="Sjj-Vx-7WD"/>
                         <segue destination="C45-cB-TPs" kind="show" identifier="goToMealDetails" id="loU-Dc-aUA"/>
+                        <segue destination="Lno-LZ-Jfl" kind="show" identifier="goToMeasureUnit" id="fln-df-EYF"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xMX-bW-ayS" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -64,14 +70,14 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="emotionOfMealCell" editingAccessoryType="disclosureIndicator" textLabel="gKs-SE-U1r" style="IBUITableViewCellStyleDefault" id="CSg-Ag-HbA" customClass="PickerTableViewCell" customModule="PickerViewCell">
-                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="28" width="375" height="43.666667938232422"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="CSg-Ag-HbA" id="T97-Af-UxH">
-                                    <rect key="frame" x="0.0" y="0.0" width="341" height="43.666666666666664"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="348" height="43.666667938232422"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="gKs-SE-U1r">
-                                            <rect key="frame" x="16" y="0.0" width="324" height="43.666666666666664"/>
+                                            <rect key="frame" x="16" y="0.0" width="324" height="43.666667938232422"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
@@ -81,14 +87,14 @@
                                 </tableViewCellContentView>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="mealDateCell" editingAccessoryType="disclosureIndicator" textLabel="yp0-8T-juF" style="IBUITableViewCellStyleDefault" id="Qbf-iJ-hao" customClass="DatePickerTableViewCell" customModule="PickerViewCell">
-                                <rect key="frame" x="0.0" y="72" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="71.666667938232422" width="375" height="43.666667938232422"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Qbf-iJ-hao" id="GVQ-hB-4oe">
-                                    <rect key="frame" x="0.0" y="0.0" width="341" height="43.666666666666664"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="348" height="43.666667938232422"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="yp0-8T-juF">
-                                            <rect key="frame" x="16" y="0.0" width="324" height="43.666666666666664"/>
+                                            <rect key="frame" x="16" y="0.0" width="324" height="43.666667938232422"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
@@ -98,14 +104,14 @@
                                 </tableViewCellContentView>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="mealContentCell" textLabel="LSC-XV-3Pr" style="IBUITableViewCellStyleDefault" id="hNd-ge-IX4">
-                                <rect key="frame" x="0.0" y="116" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="115.33333587646484" width="375" height="43.666667938232422"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="hNd-ge-IX4" id="8ug-xW-r4d">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.666666666666664"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.666667938232422"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="LSC-XV-3Pr">
-                                            <rect key="frame" x="16" y="0.0" width="343" height="43.666666666666664"/>
+                                            <rect key="frame" x="16" y="0.0" width="343" height="43.666667938232422"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
@@ -115,14 +121,14 @@
                                 </tableViewCellContentView>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="mealNameCell" editingAccessoryType="disclosureIndicator" textLabel="mgc-rA-FdB" style="IBUITableViewCellStyleDefault" id="BJH-KR-Krl">
-                                <rect key="frame" x="0.0" y="160" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="159.00000381469727" width="375" height="43.666667938232422"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="BJH-KR-Krl" id="jym-d5-8Ce">
-                                    <rect key="frame" x="0.0" y="0.0" width="341" height="43.666666666666664"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="348" height="43.666667938232422"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="mgc-rA-FdB">
-                                            <rect key="frame" x="16" y="0.0" width="324" height="43.666666666666664"/>
+                                            <rect key="frame" x="16" y="0.0" width="324" height="43.666667938232422"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
@@ -138,17 +144,27 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Meal" id="OF1-zX-sMh">
-                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="J99-bL-LJj">
-                            <connections>
-                                <action selector="cancelButtonPressed:" destination="C45-cB-TPs" id="1ld-Sb-ufe"/>
-                            </connections>
-                        </barButtonItem>
+                        <leftBarButtonItems>
+                            <barButtonItem systemItem="cancel" id="J99-bL-LJj">
+                                <connections>
+                                    <action selector="cancelButtonPressed:" destination="C45-cB-TPs" id="1ld-Sb-ufe"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem title="MeasureUnit" image="meter-icon" id="LzK-bX-cGc">
+                                <connections>
+                                    <action selector="goToMeasureUnitButtonPressed:" destination="C45-cB-TPs" id="Alg-Yq-Zcs"/>
+                                </connections>
+                            </barButtonItem>
+                        </leftBarButtonItems>
                         <barButtonItem key="rightBarButtonItem" style="done" systemItem="done" id="fmb-33-wHJ">
                             <connections>
                                 <action selector="doneButtonPressed:" destination="C45-cB-TPs" id="ZRS-OM-hbK"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <segue destination="Lno-LZ-Jfl" kind="show" identifier="goToMeasureUnit" id="Uns-ST-Wbv"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="APd-X4-QYx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -181,17 +197,17 @@
         <!--Emotion View Controller-->
         <scene sceneID="HUR-sh-03h">
             <objects>
-                <tableViewController title="Meals" id="JIz-0z-8GU" userLabel="Emotion View Controller" customClass="EmotionTableViewController" customModule="Diario_Alimentare" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController title="Emotions" id="JIz-0z-8GU" userLabel="Emotion View Controller" customClass="EmotionTableViewController" customModule="Diario_Alimentare" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="CrW-9d-8fH">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="emotionCell" id="RSj-sP-4Ej">
-                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="28" width="375" height="43.666667938232422"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="RSj-sP-4Ej" id="aMV-Ru-WwD">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.666666666666664"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.666667938232422"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -213,5 +229,50 @@
             </objects>
             <point key="canvasLocation" x="1667" y="-284"/>
         </scene>
+        <!--Measure Unit View Controller-->
+        <scene sceneID="nzU-dr-N7c">
+            <objects>
+                <tableViewController title="Measure Units" id="Lno-LZ-Jfl" userLabel="Measure Unit View Controller" customClass="MeasureUnitTableViewController" customModule="Diario_Alimentare" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="A4F-kg-nMy">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="measureUnitCell" textLabel="RcI-k4-XhC" style="IBUITableViewCellStyleDefault" id="2wd-pA-1Ug" customClass="SwipeTableViewCell" customModule="SwipeCellKit">
+                                <rect key="frame" x="0.0" y="28" width="375" height="43.666667938232422"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="2wd-pA-1Ug" id="YLi-aI-Cdk">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.666667938232422"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="RcI-k4-XhC">
+                                            <rect key="frame" x="16" y="0.0" width="343" height="43.666667938232422"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="Lno-LZ-Jfl" id="jEy-XF-M1r"/>
+                            <outlet property="delegate" destination="Lno-LZ-Jfl" id="AQe-ZA-OHf"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Measure units" id="0Gn-ab-Flg"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="syu-rj-sIX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2702" y="44"/>
+        </scene>
     </scenes>
+    <resources>
+        <image name="emoji-icon" width="34.333332061767578" height="34.333332061767578"/>
+        <image name="meter-icon" width="25" height="26"/>
+    </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="fln-df-EYF"/>
+    </inferredMetricsTieBreakers>
 </document>

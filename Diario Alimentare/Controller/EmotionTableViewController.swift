@@ -23,6 +23,8 @@ class EmotionTableViewController: UITableViewController, SwipeTableViewCellDeleg
         tableView.rowHeight = 80.0
 
         loadEmotions()
+        
+        tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 

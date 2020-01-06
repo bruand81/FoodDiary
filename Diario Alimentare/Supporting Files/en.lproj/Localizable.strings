@@ -30,6 +30,7 @@
 "Insert the a name of this meal (e.g. Launch, Dinner, etc...)" = "Insert the a name of this meal (e.g. Launch, Dinner, etc...)";
 "Modify new dish" = "Modify new dish";
 "Modify the selected dishes for this meal" = "Modify the selected dishes for this meal";
+"Add a new dishes for this meal" = "Add a new dishes for this meal";
 "Modify Dish" = "Modify Dish";
 "Cancel" = "Cancel";
 "Meal" = "Meal";
@@ -37,3 +38,10 @@
 "pz" = "pz";
 "gr" = "gr";
 "ml" = "ml";
+"Measure Units" = "Measure Units";
+"New measure unit" = "New measure unit";
+"Edit measure unit" = "Edit measure unit";
+"Select name for measure unit" = "Select name for measure unit";
+"Add measure unit" = "Add measure unit";
+"Edit" = "Edit";
+"Delete" = "Delete";
