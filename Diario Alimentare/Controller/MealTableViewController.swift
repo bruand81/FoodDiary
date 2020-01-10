@@ -9,6 +9,7 @@
 import UIKit
 import RealmSwift
 import SwipeCellKit
+import GoogleMobileAds
 
 struct MealDetailSection: Comparable {
     var month: Date
@@ -49,6 +50,7 @@ fileprivate func firstDayOfMonth(date : Date) -> Date {
 
 class MealTableViewController: UITableViewController {
     @IBOutlet weak var emotionButton: UIBarButtonItem!
+    @IBOutlet weak var bannerView: GADBannerView!
     // let realm = try! Realm()
     var meals: Results<Meal>?
     var createNewMeal = false
@@ -64,6 +66,11 @@ class MealTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         //emotionButton.title = "☺︎"
+//        bannerView.adUnitID = Bundle.main.object(forInfoDictionaryKey: "GADUnitID") as? String
+        bannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
+        bannerView.rootViewController = self
+        bannerView.delegate = self
+        bannerView.load(GADRequest())
         
         tableView.register(UINib(nibName: "MealTableViewCell", bundle: nil), forCellReuseIdentifier: MealTableViewCell().reuseIdentifier ?? "customMealCell")
         tableView.rowHeight = 80.0
@@ -297,4 +304,40 @@ extension MealTableViewController: MealDetailDelegate {
     func updatedMealDetails() {
         loadMeals()
     }
+}
+
+extension MealTableViewController: GADBannerViewDelegate {
+    /// Tells the delegate an ad request loaded an ad.
+    func adViewDidReceiveAd(_ bannerView: GADBannerView) {
+      print("adViewDidReceiveAd")
+    }
+
+    /// Tells the delegate an ad request failed.
+    func adView(_ bannerView: GADBannerView,
+        didFailToReceiveAdWithError error: GADRequestError) {
+      print("adView:didFailToReceiveAdWithError: \(error.localizedDescription)")
+    }
+
+    /// Tells the delegate that a full-screen view will be presented in response
+    /// to the user clicking on an ad.
+    func adViewWillPresentScreen(_ bannerView: GADBannerView) {
+      print("adViewWillPresentScreen")
+    }
+
+    /// Tells the delegate that the full-screen view will be dismissed.
+    func adViewWillDismissScreen(_ bannerView: GADBannerView) {
+      print("adViewWillDismissScreen")
+    }
+
+    /// Tells the delegate that the full-screen view has been dismissed.
+    func adViewDidDismissScreen(_ bannerView: GADBannerView) {
+      print("adViewDidDismissScreen")
+    }
+
+    /// Tells the delegate that a user click will open another app (such as
+    /// the App Store), backgrounding the current app.
+    func adViewWillLeaveApplication(_ bannerView: GADBannerView) {
+      print("adViewWillLeaveApplication")
+    }
+
 }

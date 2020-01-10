@@ -15,9 +15,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <view key="tableHeaderView" contentMode="scaleToFill" id="Q2K-Ns-Nok" customClass="GADBannerView">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        </view>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="mealCell" id="uXt-VP-ApA" customClass="MealTableViewCell" customModule="Diario_Alimentare" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="28" width="375" height="43.666667938232422"/>
+                                <rect key="frame" x="0.0" y="72" width="375" height="43.666667938232422"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="uXt-VP-ApA" id="lhw-cS-lKb">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="43.666667938232422"/>
@@ -50,6 +55,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="bannerView" destination="Q2K-Ns-Nok" id="Qvp-UE-1eA"/>
                         <outlet property="emotionButton" destination="eLL-K7-aV3" id="oDc-oS-zcL"/>
                         <segue destination="JIz-0z-8GU" kind="show" identifier="goToEmotions" id="Sjj-Vx-7WD"/>
                         <segue destination="C45-cB-TPs" kind="show" identifier="goToMealDetails" id="loU-Dc-aUA"/>
@@ -275,6 +281,6 @@
         <image name="meter-icon" width="25" height="26"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Uns-ST-Wbv"/>
+        <segue reference="fln-df-EYF"/>
     </inferredMetricsTieBreakers>
 </document>
