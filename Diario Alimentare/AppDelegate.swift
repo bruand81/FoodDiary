@@ -9,6 +9,7 @@
 import UIKit
 import RealmSwift
 import ChameleonFramework
+import Firebase
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -18,13 +19,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        print(Realm.Configuration.defaultConfiguration.fileURL!)
         
+        print(Realm.Configuration.defaultConfiguration.fileURL!)
+        // Use Firebase library to configure APIs.
+        FirebaseApp.configure()
+
+        // Initialize the Google Mobile Ads SDK.
+        GADMobileAds.sharedInstance().start(completionHandler: nil)
+
         do {
             let config = Realm.Configuration(
             // Set the new schema version. This must be greater than the previously used
             // version (if you've never set a schema version before, the version is 0).
-            schemaVersion: 2,
+            schemaVersion: 3,
 
             // Set the block which will be called automatically when opening a Realm with
             // a schema version lower than the one set above
@@ -34,6 +41,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     migration.enumerateObjects(ofType: Dish.className()) { (oldObject, newObject) in
                         newObject!["quantity"] = -1
                     }
+                } else if (oldSchemaVersion < 2) {
+                    print("Updated to new schema v3")
                 }
             })
             

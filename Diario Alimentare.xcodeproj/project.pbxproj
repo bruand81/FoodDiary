@@ -16,6 +16,7 @@
 		A51B973B228AAAC100C5118B /* MealDetailsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51B973A228AAAC100C5118B /* MealDetailsTableViewController.swift */; };
 		A51B973D228AC5E800C5118B /* Dish.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51B973C228AC5E800C5118B /* Dish.swift */; };
 		A53F7B91228EF6D400BDCF41 /* DatePickerViewCellWithToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53F7B90228EF6D400BDCF41 /* DatePickerViewCellWithToolbar.swift */; };
+		A554C25C23C85A6A000FDAF6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A554C25B23C85A6A000FDAF6 /* GoogleService-Info.plist */; };
 		A55A31FA23C1C77400F287AA /* MeasureUnitTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55A31F923C1C77400F287AA /* MeasureUnitTableViewController.swift */; };
 		A5C2447F23BF4CC300B7663E /* MeasureUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C2447E23BF4CC300B7663E /* MeasureUnit.swift */; };
 		A5E61DEE2285BBE300B14772 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E61DED2285BBE300B14772 /* AppDelegate.swift */; };
@@ -39,6 +40,7 @@
 		A51B973A228AAAC100C5118B /* MealDetailsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealDetailsTableViewController.swift; sourceTree = "<group>"; };
 		A51B973C228AC5E800C5118B /* Dish.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dish.swift; sourceTree = "<group>"; };
 		A53F7B90228EF6D400BDCF41 /* DatePickerViewCellWithToolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerViewCellWithToolbar.swift; sourceTree = "<group>"; };
+		A554C25B23C85A6A000FDAF6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		A55A31F923C1C77400F287AA /* MeasureUnitTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasureUnitTableViewController.swift; sourceTree = "<group>"; };
 		A5C2447E23BF4CC300B7663E /* MeasureUnit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasureUnit.swift; sourceTree = "<group>"; };
 		A5E61DEA2285BBE300B14772 /* Diario Alimentare.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Diario Alimentare.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -108,6 +110,7 @@
 		A5E61DEC2285BBE300B14772 /* Diario Alimentare */ = {
 			isa = PBXGroup;
 			children = (
+				A554C25B23C85A6A000FDAF6 /* GoogleService-Info.plist */,
 				A5E61E022285BC4700B14772 /* Controller */,
 				A5E61E012285BC4000B14772 /* View */,
 				A5E61E002285BC3500B14772 /* Model */,
@@ -183,6 +186,7 @@
 				A5E61DE72285BBE300B14772 /* Frameworks */,
 				A5E61DE82285BBE300B14772 /* Resources */,
 				A55440B88DB43F65E4143077 /* [CP] Embed Pods Frameworks */,
+				A565F58723C85C53002A59D8 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -238,6 +242,7 @@
 				A5E61DF52285BBE900B14772 /* Assets.xcassets in Resources */,
 				A5E61DF32285BBE300B14772 /* Main.storyboard in Resources */,
 				A50C0F9D22868B21005EB843 /* EmotionTableViewCell.xib in Resources */,
+				A554C25C23C85A6A000FDAF6 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -282,6 +287,23 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Diario Alimentare/Pods-Diario Alimentare-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		A565F58723C85C53002A59D8 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n\"${PODS_ROOT}/Fabric/run\"\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -464,6 +486,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 2;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = Z855PRXKLZ;
 				INFOPLIST_FILE = "Diario Alimentare/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (

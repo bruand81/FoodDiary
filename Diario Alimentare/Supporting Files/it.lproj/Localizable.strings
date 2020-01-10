@@ -45,3 +45,6 @@
 "Add measure unit" = "Aggiungi unità di misura";
 "Edit" = "Modifica";
 "Delete" = "Cancella";
+"Dish name" = "Inserisci il nome della pietanza";
+"Dish quantity eaten" = "Inserisci la quantità della pietanza";
+"Dish quantity measure unit" = "Unità di misura della quantità della pietanza";

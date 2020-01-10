@@ -11,5 +11,12 @@ target 'Diario Alimentare' do
   pod 'SwipeCellKit'
   pod 'ChameleonFramework/Swift', :git => 'https://github.com/luckychris/Chameleon.git'
   pod 'PickerViewCell', :git => 'https://github.com/bruand81/PickerViewCell.git'
+  # add the Firebase pod for Google Analytics
+  pod 'Firebase/Analytics'
+  # add pods for any other desired Firebase products 
+  # https://firebase.google.com/docs/ios/setup#available-pods
+   pod 'Firebase/AdMob'
+   pod 'Fabric'
+   pod 'Crashlytics'
 
 end

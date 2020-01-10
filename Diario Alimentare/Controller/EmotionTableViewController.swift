@@ -155,6 +155,12 @@ class EmotionTableViewController: UITableViewController, SwipeTableViewCellDeleg
         editOrAddEmotion(editAt: nil)
     }
     
+    @objc func alertTextFieldDidChange(_ sender: UITextField) {
+        if let text = sender.text, !text.containsOnlyEmoji {
+            sender.text = nil
+        }
+    }
+    
     func editOrAddEmotion(editAt indexPath: IndexPath?){
         var emoticonTextField = UITextField()
         var nameTextField = UITextField()
@@ -180,6 +186,7 @@ class EmotionTableViewController: UITableViewController, SwipeTableViewCellDeleg
                 } else {
                     self.saveEmotion(emotion: newEmotion)
                 }
+                self.emotionToModify = nil
             }
             
             self.tableView.reloadData()
@@ -191,6 +198,7 @@ class EmotionTableViewController: UITableViewController, SwipeTableViewCellDeleg
             } else {
                 alertTextField.placeholder = NSLocalizedString("Select emoticon for emotion", comment: "")
             }
+            alertTextField.addTarget(self, action: #selector(self.alertTextFieldDidChange(_:)), for: .editingChanged)
             emoticonTextField = alertTextField
         }
         
@@ -200,6 +208,8 @@ class EmotionTableViewController: UITableViewController, SwipeTableViewCellDeleg
             } else {
                 alertTextField.placeholder = NSLocalizedString("Select description for emotion", comment: "")
             }
+            alertTextField.autocapitalizationType = .sentences
+            alertTextField.autocorrectionType = .default
             nameTextField = alertTextField
         }
         
@@ -230,5 +240,54 @@ class EmotionTableViewController: UITableViewController, SwipeTableViewCellDeleg
         } catch {
             print("Error inserting new emotion \(error)")
         }
+    }
+}
+
+extension Character {
+    /// A simple emoji is one scalar and presented to the user as an Emoji
+    var isSimpleEmoji: Bool {
+        guard let firstProperties = unicodeScalars.first?.properties else {
+            return false
+        }
+        return unicodeScalars.count == 1 &&
+            (firstProperties.isEmojiPresentation ||
+                firstProperties.generalCategory == .otherSymbol)
+    }
+
+    /// Checks if the scalars will be merged into an emoji
+    var isCombinedIntoEmoji: Bool {
+        return (unicodeScalars.count > 1 &&
+               unicodeScalars.contains { $0.properties.isJoinControl || $0.properties.isVariationSelector })
+            || unicodeScalars.allSatisfy({ $0.properties.isEmojiPresentation })
+    }
+
+    var isEmoji: Bool {
+        return isSimpleEmoji || isCombinedIntoEmoji
+    }
+}
+
+extension String {
+    var isSingleEmoji: Bool {
+        return count == 1 && containsEmoji
+    }
+
+    var containsEmoji: Bool {
+        return contains { $0.isEmoji }
+    }
+
+    var containsOnlyEmoji: Bool {
+        return !isEmpty && !contains { !$0.isEmoji }
+    }
+
+    var emojiString: String {
+        return emojis.map { String($0) }.reduce("", +)
+    }
+
+    var emojis: [Character] {
+        return filter { $0.isEmoji }
+    }
+
+    var emojiScalars: [UnicodeScalar] {
+        return filter{ $0.isEmoji }.flatMap { $0.unicodeScalars }
     }
 }

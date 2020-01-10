@@ -114,6 +114,7 @@ class MeasureUnitTableViewController: UITableViewController {
             if let name = nameTextField.text {
                 if let measureUnit = self.measureUnitToModify {
                     self.updateMeasureUnit(measureUnit: measureUnit, measureUnitName: name)
+                    self.measureUnitToModify = nil
                 } else {
                     self.saveMeasureUnit(name: name)
                 }
@@ -127,6 +128,8 @@ class MeasureUnitTableViewController: UITableViewController {
             } else {
                 alertTextField.placeholder = NSLocalizedString("Select name for measure unit", comment: "")
             }
+            alertTextField.autocapitalizationType = .sentences
+            alertTextField.autocorrectionType = .default
             nameTextField = alertTextField
         }
         

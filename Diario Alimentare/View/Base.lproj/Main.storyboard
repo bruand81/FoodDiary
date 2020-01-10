@@ -163,6 +163,8 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="cancelBarButtonItem" destination="J99-bL-LJj" id="vA2-AV-pHI"/>
+                        <outlet property="doneBarButtonItem" destination="fmb-33-wHJ" id="mp4-qg-EX4"/>
                         <segue destination="Lno-LZ-Jfl" kind="show" identifier="goToMeasureUnit" id="Uns-ST-Wbv"/>
                     </connections>
                 </tableViewController>
@@ -273,6 +275,6 @@
         <image name="meter-icon" width="25" height="26"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="fln-df-EYF"/>
+        <segue reference="Uns-ST-Wbv"/>
     </inferredMetricsTieBreakers>
 </document>

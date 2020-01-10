@@ -24,6 +24,8 @@ protocol MealDetailDelegate {
 
 class MealDetailsTableViewController: UITableViewController {
 
+    @IBOutlet weak var cancelBarButtonItem: UIBarButtonItem!
+    @IBOutlet weak var doneBarButtonItem: UIBarButtonItem!
     var meal: Meal?
     var emotionForMeal: Emotion?
     var dateOfMeal = Date()
@@ -61,6 +63,11 @@ class MealDetailsTableViewController: UITableViewController {
         }
         
         tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
+        
+        if #available(iOS 13.0, *) {
+            doneBarButtonItem.image = UIImage(systemName: "checkmark")
+            cancelBarButtonItem.image = UIImage(systemName: "chevron.left")
+        }
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -206,6 +213,8 @@ class MealDetailsTableViewController: UITableViewController {
                 } else {
                     alertTextField.text = currentMeal.name
                 }
+                alertTextField.autocapitalizationType = .sentences
+                alertTextField.autocorrectionType = .default
                 textField = alertTextField
             }
             
@@ -316,10 +325,11 @@ class MealDetailsTableViewController: UITableViewController {
         
         let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel, handler: nil)
         
+        
         let action = UIAlertAction(title: NSLocalizedString(actionButtonTitle, comment: ""), style: .default) { (action) in
             //What will happen when the user clicks the Add Button on our UIAlert
             if let addDishText = dishNameTextField.text {
-                let quantity = Int(quantityTextField.text ?? "-1") ?? -1
+                let quantity = Double(quantityTextField.text ?? "-1") ?? -1
 //                print(addDishText)
 //                print(quantity)
 //                print(self.measureUnitSelected?.name ?? "None")
@@ -358,19 +368,33 @@ class MealDetailsTableViewController: UITableViewController {
         
         alert.addTextField { (alertTextField) in
             //alertTextField.text = cell.textLabel?.text
-            alertTextField.text = dish.name
+            if idx != nil {
+                alertTextField.text = dish.name
+            } else {
+                alertTextField.placeholder = NSLocalizedString("Dish name", comment: "")
+            }
+            alertTextField.autocapitalizationType = .sentences
+            alertTextField.autocorrectionType = .default
             dishNameTextField = alertTextField
         }
         
         alert.addTextField { (alertTextField) in
-            alertTextField.text = "\(dish.quantity)"
-            alertTextField.keyboardType = .numberPad
+            if idx != nil {
+                alertTextField.text = "\(dish.quantity)"
+            } else {
+                alertTextField.placeholder =  NSLocalizedString("Dish quantity eaten", comment: "")
+            }
+            alertTextField.keyboardType = .decimalPad
             quantityTextField = alertTextField
             //quantity = Int(alertTextField.text ?? "-1") ?? -1
         }
         
         alert.addTextField { (alertTextField) in
-            alertTextField.text = self.measureUnitSelected?.name
+            if idx != nil {
+                alertTextField.text = self.measureUnitSelected?.name
+            } else {
+                alertTextField.placeholder = NSLocalizedString("Dish quantity measure unit", comment: "")
+            }
             self.doMeasureUnitPicker()
             alertTextField.inputView = self.measureUnitPicker
             alertTextField.inputAccessoryView = self.toolBar
