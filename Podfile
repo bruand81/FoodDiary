@@ -15,8 +15,8 @@ target 'Diario Alimentare' do
   pod 'Firebase/Analytics'
   # add pods for any other desired Firebase products 
   # https://firebase.google.com/docs/ios/setup#available-pods
-   pod 'Firebase/AdMob'
-   pod 'Fabric'
-   pod 'Crashlytics'
-
+  pod 'Firebase/AdMob'
+  pod 'Fabric'
+  pod 'Crashlytics'
+  pod 'XlsxReaderWriter', '~> 2.4.0', :source => 'https://github.com/charlymr/XlsxReaderWriter-Podspecs.git'
 end
