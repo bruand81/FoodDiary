@@ -66,8 +66,8 @@ class MealTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         //emotionButton.title = "☺︎"
-//        bannerView.adUnitID = Bundle.main.object(forInfoDictionaryKey: "GADUnitID") as? String
-        bannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
+        bannerView.adUnitID = Bundle.main.object(forInfoDictionaryKey: "GADUnitID") as? String
+//        bannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
         bannerView.rootViewController = self
         bannerView.delegate = self
         bannerView.load(GADRequest())
@@ -91,29 +91,12 @@ class MealTableViewController: UITableViewController {
         
         tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
         // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
+        self.clearsSelectionOnViewWillAppear = false
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
     
-    /*override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        super.traitCollectionDidChange(previousTraitCollection)
-        
-        if #available(iOS 13.0, *) {
-            let hasUserInterfaceStyleChanged = previousTraitCollection?.hasDifferentColorAppearance(comparedTo: traitCollection) ?? false
-            
-            if hasUserInterfaceStyleChanged {
-                let userInterfaceStyle = traitCollection.userInterfaceStyle
-                /*if userInterfaceStyle == .dark {
-                    Chameleon.setGlobalThemeUsingPrimaryColor(UIColor.flatBlue(), with: UIContentStyle.dark)
-                } else {
-                    Chameleon.setGlobalThemeUsingPrimaryColor(UIColor.flatBlue(), with: UIContentStyle.light)
-                }*/
-            }
-        }
-        
-    }*/
 
     // MARK: - Table view data source
 
@@ -131,9 +114,7 @@ class MealTableViewController: UITableViewController {
         if (sections.count < 1){
             return defaultCell(cell: cell)
         }
-//        guard let meal = meals?[indexPath.row] else {
-//            return defaultCell(cell: cell)
-//        }
+
         let meal = sections[indexPath.section].meals[indexPath.row]
         
         cell.emoticonForMeal.text = meal.emotionForMeal.first?.emoticon
@@ -188,63 +169,11 @@ class MealTableViewController: UITableViewController {
         dateFormatter.timeZone = TimeZone.current
         return dateFormatter.string(from: date)
     }
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
     
     func loadMeals() {
         let realm = try! Realm()
         let startDate = firstDayOfMonth(date: Date(timeInterval: TimeInterval(floatLiteral: -1*3*30*24*60*60), since: Date()))
         meals = realm.objects(Meal.self).filter("when >= %@", startDate).sorted(byKeyPath: "when", ascending: true)
-//        let groups = Dictionary(grouping: self.meals!) { (meal) in
-//            return firstDayOfMonth(date: meal.when)
-//        }
-//
-//        self.sections = groups.map({ (key, values) in
-//            return MealDetailSection(month: key, meals: values)
-//        })
         self.sections = MealDetailSection.group(meals: self.meals!)
         tableView.reloadData()
     }
@@ -267,33 +196,76 @@ class MealTableViewController: UITableViewController {
 // MARK: - SwipeCellKit methods
 extension MealTableViewController: SwipeTableViewCellDelegate {
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> [SwipeAction]? {
-        guard orientation == .right else {return nil}
-        
-        let deleteAction = SwipeAction(style: .destructive, title: "Delete") { action, indexPath in
-            let mealForDeletion = self.sections[indexPath.section].meals[indexPath.row]
-            do{
-                let realm = try! Realm()
-                try realm.write {
-                    realm.delete(mealForDeletion.dishes)
-                    realm.delete(mealForDeletion)
-                }
-            } catch {
-                print("Error deleting meal \(error)")
-            }
-            self.loadMeals()
+        if orientation == .right{
+            let deleteAction = SwipeAction(style: .destructive, title: "Delete") { action, indexPath in
+                /*let deleteAlert = UIAlertController(title: NSLocalizedString("Confirm meal deletion", comment: ""), message: NSLocalizedString("Are you sure to delete the selected meal? This action cannot be undone!", comment: ""), preferredStyle: .alert)
+                deleteAlert.addAction(UIAlertAction(title: NSLocalizedString("Delete", comment: ""), style: .destructive, handler: { (action) in*/
+                    let mealForDeletion = self.sections[indexPath.section].meals[indexPath.row]
+                    do{
+                        let realm = try Realm()
+                        try realm.write {
+                            realm.delete(mealForDeletion.dishes)
+                            realm.delete(mealForDeletion)
+                        }
+                        
+                    } catch {
+                        print("Error deleting meal \(error)")
+                    }
+                    //self.loadMeals()
+                    self.sections[indexPath.section].meals.remove(at: indexPath.row)
+                /*}))
                 
-                //                tableView.reloadData()
+                deleteAlert.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel, handler: { (action) in
+                    print("Nothing to do!")
+                }))
+                
+                self.present(deleteAlert, animated: true, completion: nil)*/
+            }
+            
+            deleteAction.image = UIImage(named: "delete-icon")
+            return [deleteAction]
+        } else {
+            let copyAction = SwipeAction(style: .default, title: NSLocalizedString("Copy", comment: "")) { (action, indexPath) in
+                let mealForCopy = self.sections[indexPath.section].meals[indexPath.row]
+                let newMeal = Meal()
+                newMeal.name = mealForCopy.name
+                newMeal.when = Date()
+                do{
+                    let realm = try Realm()
+                    try realm.write {
+                        realm.add(newMeal)
+                        mealForCopy.emotionForMeal.first?.meals.append(newMeal)
+                        for dish in mealForCopy.dishes {
+                            let newDish = Dish()
+                            newDish.name = dish.name
+                            newDish.quantity = dish.quantity
+                            realm.add(newDish)
+                            dish.measureUnitForDishes.first?.dishes.append(newDish)
+                            newMeal.dishes.append(newDish)
+                        }
+                    }
+                } catch {
+                   print("Error deleting meal \(error)")
+                }
+                self.loadMeals()
+            }
+            
+            copyAction.image = UIImage(named: "copy-icon")
+            copyAction.backgroundColor = UIColor.systemYellow
+            return [copyAction]
         }
-        
-        deleteAction.image = UIImage(named: "delete-icon")
-        return [deleteAction]
     }
     
     func tableView(_ tableView: UITableView, editActionsOptionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> SwipeOptions {
         var options = SwipeOptions()
         
-        options.expansionStyle = .destructive
-        options.transitionStyle = .border
+        if orientation == .right{
+            options.expansionStyle = .destructive
+            options.transitionStyle = .border
+        } else {
+            options.expansionStyle = .none
+            options.transitionStyle = .border
+        }
         
         return options
     }

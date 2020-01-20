@@ -48,3 +48,6 @@
 "Dish name" = "Dish name";
 "Dish quantity eaten" = "Dish quantity eaten";
 "Dish quantity measure unit" = "Dish quantity measure unit";
+"Delete" = "Delete";
+"Confirm meal deletion" = "Confirm meal deletion";
+"Are you sure to delete the selected meal? This action cannot be undone!" = "Are you sure to delete the selected meal? This action cannot be undone!";
