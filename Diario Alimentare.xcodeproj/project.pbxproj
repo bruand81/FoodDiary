@@ -18,6 +18,7 @@
 		A53F7B91228EF6D400BDCF41 /* DatePickerViewCellWithToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53F7B90228EF6D400BDCF41 /* DatePickerViewCellWithToolbar.swift */; };
 		A554C25C23C85A6A000FDAF6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A554C25B23C85A6A000FDAF6 /* GoogleService-Info.plist */; };
 		A55A31FA23C1C77400F287AA /* MeasureUnitTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55A31F923C1C77400F287AA /* MeasureUnitTableViewController.swift */; };
+		A569299C23D1CA010045CC46 /* ShareSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A569299B23D1CA010045CC46 /* ShareSettingsViewController.swift */; };
 		A5C2447F23BF4CC300B7663E /* MeasureUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C2447E23BF4CC300B7663E /* MeasureUnit.swift */; };
 		A5E61DEE2285BBE300B14772 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E61DED2285BBE300B14772 /* AppDelegate.swift */; };
 		A5E61DF32285BBE300B14772 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A5E61DF12285BBE300B14772 /* Main.storyboard */; };
@@ -42,6 +43,7 @@
 		A53F7B90228EF6D400BDCF41 /* DatePickerViewCellWithToolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerViewCellWithToolbar.swift; sourceTree = "<group>"; };
 		A554C25B23C85A6A000FDAF6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		A55A31F923C1C77400F287AA /* MeasureUnitTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasureUnitTableViewController.swift; sourceTree = "<group>"; };
+		A569299B23D1CA010045CC46 /* ShareSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareSettingsViewController.swift; sourceTree = "<group>"; };
 		A5C2447E23BF4CC300B7663E /* MeasureUnit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasureUnit.swift; sourceTree = "<group>"; };
 		A5E61DEA2285BBE300B14772 /* Diario Alimentare.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Diario Alimentare.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5E61DED2285BBE300B14772 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -159,6 +161,7 @@
 				A50C0F962286899C005EB843 /* EmotionTableViewController.swift */,
 				A51B973A228AAAC100C5118B /* MealDetailsTableViewController.swift */,
 				A55A31F923C1C77400F287AA /* MeasureUnitTableViewController.swift */,
+				A569299B23D1CA010045CC46 /* ShareSettingsViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -322,6 +325,7 @@
 				A5E61E0A2285C29A00B14772 /* Emotion.swift in Sources */,
 				A50C0F9522868941005EB843 /* MealTableViewController.swift in Sources */,
 				A50C0F972286899C005EB843 /* EmotionTableViewController.swift in Sources */,
+				A569299C23D1CA010045CC46 /* ShareSettingsViewController.swift in Sources */,
 				A5E61E0E2285C8E000B14772 /* MealTableViewCell.swift in Sources */,
 				A53F7B91228EF6D400BDCF41 /* DatePickerViewCellWithToolbar.swift in Sources */,
 			);
@@ -488,6 +492,8 @@
 				CURRENT_PROJECT_VERSION = 2;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = Z855PRXKLZ;
+				GADUnitId = "";
+				"GADUnitId[arch=*]" = "ca-app-pub-3940256099942544/2934735716";
 				INFOPLIST_FILE = "Diario Alimentare/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -509,6 +515,8 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = Z855PRXKLZ;
+				GADUnitId = "";
+				"GADUnitId[arch=*]" = "ca-app-pub-7085815040234496/8320130886";
 				INFOPLIST_FILE = "Diario Alimentare/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

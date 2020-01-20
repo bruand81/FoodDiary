@@ -48,3 +48,6 @@
 "Dish name" = "Inserisci il nome della pietanza";
 "Dish quantity eaten" = "Inserisci la quantità della pietanza";
 "Dish quantity measure unit" = "Unità di misura della quantità della pietanza";
+"Delete" = "Cancella";
+"Confirm meal deletion" = "Conferma cancellazione pasto";
+"Are you sure to delete the selected meal? This action cannot be undone!" = "Sei sicuro di voler cancellare il pasto selezionato? ATTENZIONE: questa azione non è reversibile!";
