@@ -151,7 +151,7 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Meal" id="OF1-zX-sMh">
                         <leftBarButtonItems>
-                            <barButtonItem systemItem="cancel" id="J99-bL-LJj">
+                            <barButtonItem title="Item" id="J99-bL-LJj">
                                 <connections>
                                     <action selector="cancelButtonPressed:" destination="C45-cB-TPs" id="1ld-Sb-ufe"/>
                                 </connections>
@@ -162,7 +162,7 @@
                                 </connections>
                             </barButtonItem>
                         </leftBarButtonItems>
-                        <barButtonItem key="rightBarButtonItem" style="done" systemItem="done" id="fmb-33-wHJ">
+                        <barButtonItem key="rightBarButtonItem" title="Item" style="done" id="fmb-33-wHJ">
                             <connections>
                                 <action selector="doneButtonPressed:" destination="C45-cB-TPs" id="ZRS-OM-hbK"/>
                             </connections>

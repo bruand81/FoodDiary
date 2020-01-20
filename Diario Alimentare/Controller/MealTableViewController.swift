@@ -123,7 +123,7 @@ class MealTableViewController: UITableViewController {
             var dishQuantity = ""
             
             if dish.quantity > 0 {
-                dishQuantity = " (\(dish.quantity) \(dish.measureUnitForDishes.first?.name ?? "NN"))"
+                dishQuantity = " (\(self.format(quantity: dish.quantity)) \(dish.measureUnitForDishes.first?.name ?? "NN"))"
             }
             let dishName = "\(dish.name)\(dishQuantity)"
             
@@ -191,6 +191,15 @@ class MealTableViewController: UITableViewController {
     @IBAction func goToMeasureUnitButtonPressed(_ sender: UIBarButtonItem) {
         performSegue(withIdentifier: "goToMeasureUnit", sender: self)
     }
+    
+    func format(quantity: Double) -> String {
+        let formatter = NumberFormatter()
+        formatter.usesSignificantDigits = true
+        formatter.minimumSignificantDigits = 0 // default
+        formatter.maximumSignificantDigits = 2 // default
+        return formatter.string(from: NSNumber(value: quantity)) ?? ""
+    }
+
     
 }
 // MARK: - SwipeCellKit methods

@@ -67,6 +67,9 @@ class MealDetailsTableViewController: UITableViewController {
         if #available(iOS 13.0, *) {
             doneBarButtonItem.image = UIImage(systemName: "checkmark")
             cancelBarButtonItem.image = UIImage(systemName: "chevron.left")
+        } else {
+            doneBarButtonItem.title = NSLocalizedString("Done", comment: "")
+            cancelBarButtonItem.title = NSLocalizedString("Cancel", comment: "")
         }
         // Uncomment the following line to preserve selection between presentations
         self.clearsSelectionOnViewWillAppear = false
@@ -151,7 +154,7 @@ class MealDetailsTableViewController: UITableViewController {
                 var dishQuantity = ""
                 
                 if dish.quantity > 0 {
-                    dishQuantity = " (\(dish.quantity) \(dish.measureUnitForDishes.first?.name ?? "NN"))"
+                    dishQuantity = " (\(format(quantity: dish.quantity)) \(dish.measureUnitForDishes.first?.name ?? "NN"))"
                 }
                 let dishName = "\(dish.name)\(dishQuantity)"
                 cell.textLabel?.text = dishName
@@ -311,7 +314,7 @@ class MealDetailsTableViewController: UITableViewController {
         
         alert.addTextField { (alertTextField) in
             if idx != nil {
-                alertTextField.text = "\(dish.quantity)"
+                alertTextField.text = "\(self.format(quantity:dish.quantity))"
             } else {
                 alertTextField.placeholder =  NSLocalizedString("Dish quantity eaten", comment: "")
             }
@@ -414,8 +417,14 @@ class MealDetailsTableViewController: UITableViewController {
             addOrEditDish(indexPath: nil)
         }
     }
-
-
+    
+    func format(quantity: Double) -> String {
+        let formatter = NumberFormatter()
+        formatter.usesSignificantDigits = true
+        formatter.minimumSignificantDigits = 0 // default
+        formatter.maximumSignificantDigits = 2 // default
+        return formatter.string(from: NSNumber(value: quantity)) ?? ""
+    }
 
     @IBAction func cancelButtonPressed(_ sender: UIBarButtonItem) {
         if !_isUpdate {
