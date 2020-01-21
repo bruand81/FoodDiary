@@ -16,10 +16,16 @@
 		A51B973B228AAAC100C5118B /* MealDetailsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51B973A228AAAC100C5118B /* MealDetailsTableViewController.swift */; };
 		A51B973D228AC5E800C5118B /* Dish.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51B973C228AC5E800C5118B /* Dish.swift */; };
 		A53F7B91228EF6D400BDCF41 /* DatePickerViewCellWithToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53F7B90228EF6D400BDCF41 /* DatePickerViewCellWithToolbar.swift */; };
-		A554C25C23C85A6A000FDAF6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A554C25B23C85A6A000FDAF6 /* GoogleService-Info.plist */; };
 		A55A31FA23C1C77400F287AA /* MeasureUnitTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55A31F923C1C77400F287AA /* MeasureUnitTableViewController.swift */; };
 		A569299C23D1CA010045CC46 /* ShareSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A569299B23D1CA010045CC46 /* ShareSettingsViewController.swift */; };
+		A56CA84A23D6278700898B90 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A56CA84923D6278700898B90 /* GoogleService-Info.plist */; };
 		A5C2447F23BF4CC300B7663E /* MeasureUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C2447E23BF4CC300B7663E /* MeasureUnit.swift */; };
+		A5D0850723D6F98E00961525 /* ToolbarCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A5D0850623D6F98E00961525 /* ToolbarCell.xib */; };
+		A5D0850923D6F9A900961525 /* ToolbarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D0850823D6F9A900961525 /* ToolbarCell.swift */; };
+		A5D0850C23D72C4500961525 /* SegmentedControlCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D0850A23D72C4500961525 /* SegmentedControlCell.swift */; };
+		A5D0850D23D72C4500961525 /* SegmentedControlCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A5D0850B23D72C4500961525 /* SegmentedControlCell.xib */; };
+		A5D0850F23D739E700961525 /* SwitchCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A5D0850E23D739E700961525 /* SwitchCell.xib */; };
+		A5D0851123D73BF300961525 /* SwitchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D0851023D73BF300961525 /* SwitchCell.swift */; };
 		A5E61DEE2285BBE300B14772 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E61DED2285BBE300B14772 /* AppDelegate.swift */; };
 		A5E61DF32285BBE300B14772 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A5E61DF12285BBE300B14772 /* Main.storyboard */; };
 		A5E61DF52285BBE900B14772 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A5E61DF42285BBE900B14772 /* Assets.xcassets */; };
@@ -41,10 +47,16 @@
 		A51B973A228AAAC100C5118B /* MealDetailsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealDetailsTableViewController.swift; sourceTree = "<group>"; };
 		A51B973C228AC5E800C5118B /* Dish.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dish.swift; sourceTree = "<group>"; };
 		A53F7B90228EF6D400BDCF41 /* DatePickerViewCellWithToolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerViewCellWithToolbar.swift; sourceTree = "<group>"; };
-		A554C25B23C85A6A000FDAF6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		A55A31F923C1C77400F287AA /* MeasureUnitTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasureUnitTableViewController.swift; sourceTree = "<group>"; };
 		A569299B23D1CA010045CC46 /* ShareSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareSettingsViewController.swift; sourceTree = "<group>"; };
+		A56CA84923D6278700898B90 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		A5C2447E23BF4CC300B7663E /* MeasureUnit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasureUnit.swift; sourceTree = "<group>"; };
+		A5D0850623D6F98E00961525 /* ToolbarCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ToolbarCell.xib; sourceTree = "<group>"; };
+		A5D0850823D6F9A900961525 /* ToolbarCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolbarCell.swift; sourceTree = "<group>"; };
+		A5D0850A23D72C4500961525 /* SegmentedControlCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegmentedControlCell.swift; sourceTree = "<group>"; };
+		A5D0850B23D72C4500961525 /* SegmentedControlCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SegmentedControlCell.xib; sourceTree = "<group>"; };
+		A5D0850E23D739E700961525 /* SwitchCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SwitchCell.xib; sourceTree = "<group>"; };
+		A5D0851023D73BF300961525 /* SwitchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwitchCell.swift; sourceTree = "<group>"; };
 		A5E61DEA2285BBE300B14772 /* Diario Alimentare.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Diario Alimentare.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5E61DED2285BBE300B14772 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A5E61DF22285BBE300B14772 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -112,7 +124,7 @@
 		A5E61DEC2285BBE300B14772 /* Diario Alimentare */ = {
 			isa = PBXGroup;
 			children = (
-				A554C25B23C85A6A000FDAF6 /* GoogleService-Info.plist */,
+				A56CA84923D6278700898B90 /* GoogleService-Info.plist */,
 				A5E61E022285BC4700B14772 /* Controller */,
 				A5E61E012285BC4000B14772 /* View */,
 				A5E61E002285BC3500B14772 /* Model */,
@@ -169,10 +181,16 @@
 		A5E61E0B2285C8A500B14772 /* CustomCells */ = {
 			isa = PBXGroup;
 			children = (
+				A5D0850A23D72C4500961525 /* SegmentedControlCell.swift */,
+				A5D0850B23D72C4500961525 /* SegmentedControlCell.xib */,
 				A5E61E0C2285C8E000B14772 /* MealTableViewCell.swift */,
 				A5E61E0D2285C8E000B14772 /* MealTableViewCell.xib */,
 				A50C0F9A22868B21005EB843 /* EmotionTableViewCell.swift */,
 				A50C0F9B22868B21005EB843 /* EmotionTableViewCell.xib */,
+				A5D0850823D6F9A900961525 /* ToolbarCell.swift */,
+				A5D0850623D6F98E00961525 /* ToolbarCell.xib */,
+				A5D0851023D73BF300961525 /* SwitchCell.swift */,
+				A5D0850E23D739E700961525 /* SwitchCell.xib */,
 			);
 			path = CustomCells;
 			sourceTree = "<group>";
@@ -239,13 +257,16 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A5D0850D23D72C4500961525 /* SegmentedControlCell.xib in Resources */,
 				A5E61DF82285BBE900B14772 /* LaunchScreen.storyboard in Resources */,
 				A50C0F9E2286CBEB005EB843 /* Localizable.strings in Resources */,
+				A5D0850723D6F98E00961525 /* ToolbarCell.xib in Resources */,
 				A5E61E0F2285C8E000B14772 /* MealTableViewCell.xib in Resources */,
 				A5E61DF52285BBE900B14772 /* Assets.xcassets in Resources */,
 				A5E61DF32285BBE300B14772 /* Main.storyboard in Resources */,
 				A50C0F9D22868B21005EB843 /* EmotionTableViewCell.xib in Resources */,
-				A554C25C23C85A6A000FDAF6 /* GoogleService-Info.plist in Resources */,
+				A56CA84A23D6278700898B90 /* GoogleService-Info.plist in Resources */,
+				A5D0850F23D739E700961525 /* SwitchCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -321,12 +342,15 @@
 				A5E61DEE2285BBE300B14772 /* AppDelegate.swift in Sources */,
 				A51B973B228AAAC100C5118B /* MealDetailsTableViewController.swift in Sources */,
 				A5C2447F23BF4CC300B7663E /* MeasureUnit.swift in Sources */,
+				A5D0850C23D72C4500961525 /* SegmentedControlCell.swift in Sources */,
 				A55A31FA23C1C77400F287AA /* MeasureUnitTableViewController.swift in Sources */,
 				A5E61E0A2285C29A00B14772 /* Emotion.swift in Sources */,
 				A50C0F9522868941005EB843 /* MealTableViewController.swift in Sources */,
 				A50C0F972286899C005EB843 /* EmotionTableViewController.swift in Sources */,
 				A569299C23D1CA010045CC46 /* ShareSettingsViewController.swift in Sources */,
 				A5E61E0E2285C8E000B14772 /* MealTableViewCell.swift in Sources */,
+				A5D0851123D73BF300961525 /* SwitchCell.swift in Sources */,
+				A5D0850923D6F9A900961525 /* ToolbarCell.swift in Sources */,
 				A53F7B91228EF6D400BDCF41 /* DatePickerViewCellWithToolbar.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -489,7 +513,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 4;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = Z855PRXKLZ;
 				GADUnitId = "";
@@ -499,7 +523,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.1;
+				MARKETING_VERSION = 1.5.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "cloud.antares.Food-Diary";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -513,7 +537,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = Z855PRXKLZ;
 				GADUnitId = "";
 				"GADUnitId[arch=*]" = "ca-app-pub-7085815040234496/8320130886";
@@ -522,7 +546,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.1;
+				MARKETING_VERSION = 1.5.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "cloud.antares.Food-Diary";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;

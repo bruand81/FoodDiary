@@ -39,6 +39,7 @@ class MealDetailsTableViewController: UITableViewController {
     let toolBar = UIToolbar()
     var measureUnitTextField = UITextField()
     var measureUnitSelected: MeasureUnit?
+    var origCellLabelTextColor:UIColor?
     
     lazy var emotions: Results<Emotion> = realm.objects(Emotion.self).sorted(byKeyPath: "name", ascending: true)
     lazy var measureUnits: Results<MeasureUnit> = realm.objects(MeasureUnit.self).sorted(byKeyPath: "name", ascending: true)
@@ -64,12 +65,11 @@ class MealDetailsTableViewController: UITableViewController {
         
         tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
         
+        doneBarButtonItem.title = NSLocalizedString("Done", comment: "")
+        cancelBarButtonItem.title = NSLocalizedString("Cancel", comment: "")
         if #available(iOS 13.0, *) {
             doneBarButtonItem.image = UIImage(systemName: "checkmark")
             cancelBarButtonItem.image = UIImage(systemName: "chevron.left")
-        } else {
-            doneBarButtonItem.title = NSLocalizedString("Done", comment: "")
-            cancelBarButtonItem.title = NSLocalizedString("Cancel", comment: "")
         }
         // Uncomment the following line to preserve selection between presentations
         self.clearsSelectionOnViewWillAppear = false
@@ -451,6 +451,7 @@ class MealDetailsTableViewController: UITableViewController {
         self.navigationController?.popViewController(animated: true)
         self.dismiss(animated: true, completion: nil)
     }
+    
     @IBAction func goToMeasureUnitButtonPressed(_ sender: UIBarButtonItem) {
         performSegue(withIdentifier: "goToMeasureUnit", sender: self)
     }
@@ -499,7 +500,8 @@ extension MealDetailsTableViewController : DatePickerTableCellDelegate{
         duplicateDatePickerExitBarrier = false
         cell.picker.date = dateFormatter.date(from: dateCell.textLabel!.text!) ?? Date()
         //cell.textLabel?.textColor = FlatRedDark()
-        cell.textLabel?.textColor = UIColor.red
+        self.origCellLabelTextColor = cell.textLabel?.textColor
+        cell.textLabel?.textColor = .systemRed
     }
     
     func onDatePickerClose(_ cell: DatePickerTableViewCell) {
@@ -516,7 +518,7 @@ extension MealDetailsTableViewController : DatePickerTableCellDelegate{
         } catch {
             print("error updating meal \(error)")
         }
-        cell.textLabel?.textColor = UIColor.black
+        cell.textLabel?.textColor = self.origCellLabelTextColor
         _ = cell.resignFirstResponder()
         tableView.reloadData()
     }
@@ -550,7 +552,8 @@ extension MealDetailsTableViewController : PickerTableCellDelegate, PickerTableC
     func onPickerOpen(_ cell: PickerTableViewCell) {
         guard let emotionCell = tableView.cellForRow(at: indexPathForEmotion!) else {return}
         duplicateExitBarrier = false
-        emotionCell.textLabel?.textColor = UIColor.red
+        self.origCellLabelTextColor = emotionCell.textLabel?.textColor
+        emotionCell.textLabel?.textColor = .systemRed
         if let emotionLabelText = emotionCell.textLabel?.text {
             let emotionText = emotionLabelText.toLengthOf(length: 2)
             guard let emotionIndex = emotions.index(matching: NSPredicate(format: "name = %@", emotionText)) else {return}

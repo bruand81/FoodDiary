@@ -52,3 +52,10 @@
 "Confirm meal deletion" = "Confirm meal deletion";
 "Are you sure to delete the selected meal? This action cannot be undone!" = "Are you sure to delete the selected meal? This action cannot be undone!";
 "Done" =  "Done";
+"Copy" = "Copy";
+"Export to CSV" = "Export to CSV";
+"From date" = "From date";
+"To date" = "To date";
+"Export format" = "Export format";
+"Export all" = "Export all";
+"Export" = "Export";

@@ -52,3 +52,10 @@
 "Confirm meal deletion" = "Conferma cancellazione pasto";
 "Are you sure to delete the selected meal? This action cannot be undone!" = "Sei sicuro di voler cancellare il pasto selezionato? ATTENZIONE: questa azione non è reversibile!";
 "Done" =  "Fatto";
+"Copy" = "Copia";
+"Export to CSV" = "Esporta in CSV";
+"From date" = "Dalla data";
+"To date" = "Alla data";
+"Export format" = "Formato di esportazione";
+"Export all" = "Esporta tutto";
+"Export" = "Esporta";

@@ -10,6 +10,7 @@ import UIKit
 import RealmSwift
 import SwipeCellKit
 import GoogleMobileAds
+import Crashlytics
 
 struct MealDetailSection: Comparable {
     var month: Date
@@ -55,6 +56,7 @@ class MealTableViewController: UITableViewController {
     var meals: Results<Meal>?
     var createNewMeal = false
     var sections = [MealDetailSection]()
+    var selectedMeal: Meal?
     
     fileprivate lazy var dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
@@ -151,8 +153,10 @@ class MealTableViewController: UITableViewController {
             let destinationVC = segue.destination as! MealDetailsTableViewController
             destinationVC.delegate = self
             if !createNewMeal {
-                if let indexPath = tableView.indexPathForSelectedRow {
+                if let indexPath = tableView.indexPathForSelectedRow{
                     destinationVC.meal = sections[indexPath.section].meals[indexPath.row]
+                } else if let modifyMeal = selectedMeal {
+                    destinationVC.meal = modifyMeal
                 }
             }
         }
@@ -206,9 +210,9 @@ class MealTableViewController: UITableViewController {
 extension MealTableViewController: SwipeTableViewCellDelegate {
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> [SwipeAction]? {
         if orientation == .right{
-            let deleteAction = SwipeAction(style: .destructive, title: "Delete") { action, indexPath in
-                /*let deleteAlert = UIAlertController(title: NSLocalizedString("Confirm meal deletion", comment: ""), message: NSLocalizedString("Are you sure to delete the selected meal? This action cannot be undone!", comment: ""), preferredStyle: .alert)
-                deleteAlert.addAction(UIAlertAction(title: NSLocalizedString("Delete", comment: ""), style: .destructive, handler: { (action) in*/
+            let deleteAction = SwipeAction(style: .default, title: NSLocalizedString("Delete", comment: "")) { action, indexPath in
+                let deleteAlert = UIAlertController(title: NSLocalizedString("Confirm meal deletion", comment: ""), message: NSLocalizedString("Are you sure to delete the selected meal? This action cannot be undone!", comment: ""), preferredStyle: .alert)
+                deleteAlert.addAction(UIAlertAction(title: NSLocalizedString("Delete", comment: ""), style: .destructive, handler: { (action) in
                     let mealForDeletion = self.sections[indexPath.section].meals[indexPath.row]
                     do{
                         let realm = try Realm()
@@ -220,18 +224,19 @@ extension MealTableViewController: SwipeTableViewCellDelegate {
                     } catch {
                         print("Error deleting meal \(error)")
                     }
-                    //self.loadMeals()
-                    self.sections[indexPath.section].meals.remove(at: indexPath.row)
-                /*}))
-                
-                deleteAlert.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel, handler: { (action) in
-                    print("Nothing to do!")
+                    self.loadMeals()
+                    //self.sections[indexPath.section].meals.remove(at: indexPath.row)
                 }))
                 
-                self.present(deleteAlert, animated: true, completion: nil)*/
+                deleteAlert.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel, handler: { (action) in
+                    self.loadMeals()
+                }))
+                
+                self.present(deleteAlert, animated: true, completion: nil)
             }
             
             deleteAction.image = UIImage(named: "delete-icon")
+            deleteAction.backgroundColor = .systemRed
             return [deleteAction]
         } else {
             let copyAction = SwipeAction(style: .default, title: NSLocalizedString("Copy", comment: "")) { (action, indexPath) in
@@ -260,8 +265,16 @@ extension MealTableViewController: SwipeTableViewCellDelegate {
             }
             
             copyAction.image = UIImage(named: "copy-icon")
-            copyAction.backgroundColor = UIColor.systemYellow
-            return [copyAction]
+            copyAction.backgroundColor = .systemYellow
+            
+            let editAction = SwipeAction(style: .default, title: NSLocalizedString("Edit", comment: "")) { (action, indexPath) in
+                self.createNewMeal = (self.sections.count < 1)
+                self.selectedMeal = self.sections[indexPath.section].meals[indexPath.row]
+                self.performSegue(withIdentifier: "goToMealDetails", sender: self)
+            }
+            editAction.image = UIImage(named: "edit-icon")
+            editAction.backgroundColor = .systemBlue
+            return [editAction,copyAction]
         }
     }
     
@@ -269,10 +282,10 @@ extension MealTableViewController: SwipeTableViewCellDelegate {
         var options = SwipeOptions()
         
         if orientation == .right{
-            options.expansionStyle = .destructive
+            options.expansionStyle = .fill
             options.transitionStyle = .border
         } else {
-            options.expansionStyle = .none
+            options.expansionStyle = .selection
             options.transitionStyle = .border
         }
         
@@ -290,35 +303,36 @@ extension MealTableViewController: MealDetailDelegate {
 extension MealTableViewController: GADBannerViewDelegate {
     /// Tells the delegate an ad request loaded an ad.
     func adViewDidReceiveAd(_ bannerView: GADBannerView) {
-      print("adViewDidReceiveAd")
+//      print("adViewDidReceiveAd")
     }
 
     /// Tells the delegate an ad request failed.
     func adView(_ bannerView: GADBannerView,
         didFailToReceiveAdWithError error: GADRequestError) {
-      print("adView:didFailToReceiveAdWithError: \(error.localizedDescription)")
+        Crashlytics.sharedInstance().recordError(error)
+//      print("adView:didFailToReceiveAdWithError: \(error.localizedDescription)")
     }
 
     /// Tells the delegate that a full-screen view will be presented in response
     /// to the user clicking on an ad.
     func adViewWillPresentScreen(_ bannerView: GADBannerView) {
-      print("adViewWillPresentScreen")
+//      print("adViewWillPresentScreen")
     }
 
     /// Tells the delegate that the full-screen view will be dismissed.
     func adViewWillDismissScreen(_ bannerView: GADBannerView) {
-      print("adViewWillDismissScreen")
+//      print("adViewWillDismissScreen")
     }
 
     /// Tells the delegate that the full-screen view has been dismissed.
     func adViewDidDismissScreen(_ bannerView: GADBannerView) {
-      print("adViewDidDismissScreen")
+//      print("adViewDidDismissScreen")
     }
 
     /// Tells the delegate that a user click will open another app (such as
     /// the App Store), backgrounding the current app.
     func adViewWillLeaveApplication(_ bannerView: GADBannerView) {
-      print("adViewWillLeaveApplication")
+//      print("adViewWillLeaveApplication")
     }
 
 }
