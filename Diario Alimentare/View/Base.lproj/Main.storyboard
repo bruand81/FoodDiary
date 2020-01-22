@@ -4,6 +4,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -56,7 +57,7 @@
                             </barButtonItem>
                             <barButtonItem systemItem="action" id="Gin-xw-pz1">
                                 <connections>
-                                    <segue destination="46L-Bj-lxR" kind="popoverPresentation" popoverAnchorBarButtonItem="Gin-xw-pz1" id="UnN-cj-rdA">
+                                    <segue destination="46L-Bj-lxR" kind="popoverPresentation" identifier="sharePopOver" popoverAnchorBarButtonItem="Gin-xw-pz1" id="UnN-cj-rdA">
                                         <popoverArrowDirection key="popoverArrowDirection" up="YES"/>
                                     </segue>
                                 </connections>
@@ -213,10 +214,11 @@
         <!--Export dialog-->
         <scene sceneID="eQZ-g0-z3g">
             <objects>
-                <tableViewController id="46L-Bj-lxR" userLabel="Export dialog" customClass="ShareSettingsViewController" customModule="Diario_Alimentare" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController modalPresentationStyle="pageSheet" id="46L-Bj-lxR" userLabel="Export dialog" customClass="ShareSettingsViewController" customModule="Diario_Alimentare" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="opC-vL-wJw">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="758"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="dpn-ro-pT9"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="exportCell" textLabel="XxB-g4-Sw8" style="IBUITableViewCellStyleDefault" id="suu-c5-iXj">
                                 <rect key="frame" x="0.0" y="28" width="375" height="43.666667938232422"/>
@@ -294,7 +296,13 @@
                             <outlet property="delegate" destination="46L-Bj-lxR" id="Ku4-FO-qrD"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="c4f-V4-bs0"/>
+                    <navigationItem key="navigationItem" id="c4f-V4-bs0">
+                        <barButtonItem key="rightBarButtonItem" style="done" systemItem="done" id="YKI-jU-co1" userLabel="Done Button"/>
+                    </navigationItem>
+                    <value key="contentSizeForViewInPopover" type="size" width="250" height="758"/>
+                    <connections>
+                        <outlet property="doneButton" destination="YKI-jU-co1" id="bBg-Aw-CJ7"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8Ue-e6-I0c" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

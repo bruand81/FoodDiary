@@ -10,36 +10,33 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="Qim-8q-AXS" customClass="ToolbarCell" customModule="Diario_Alimentare" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Qim-8q-AXS" id="IC1-jY-39S">
-                <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HUG-uS-rqg">
-                        <rect key="frame" x="373" y="0.0" width="41" height="44"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HUG-uS-rqg">
+                        <rect key="frame" x="8" y="8" width="304" height="28"/>
+                        <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                         <state key="normal" title="Done"/>
                         <connections>
                             <action selector="doneButtonPressed:" destination="Qim-8q-AXS" eventType="primaryActionTriggered" id="bmd-h6-kXw"/>
                             <action selector="doneButtonPressed:" destination="Qim-8q-AXS" eventType="touchUpInside" id="eHa-l8-Hlz"/>
                         </connections>
                     </button>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fTx-ck-dbJ">
-                        <rect key="frame" x="0.0" y="0.0" width="360" height="44"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <nil key="textColor"/>
-                        <nil key="highlightedColor"/>
-                    </label>
                 </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="HUG-uS-rqg" secondAttribute="trailing" constant="8" id="3WG-Tb-zt5"/>
+                    <constraint firstItem="HUG-uS-rqg" firstAttribute="leading" secondItem="IC1-jY-39S" secondAttribute="leading" constant="8" id="azW-io-D91"/>
+                    <constraint firstAttribute="bottom" secondItem="HUG-uS-rqg" secondAttribute="bottom" constant="8" id="bE0-XC-s8K"/>
+                    <constraint firstItem="HUG-uS-rqg" firstAttribute="top" secondItem="IC1-jY-39S" secondAttribute="top" constant="8" id="xF4-6P-AEh"/>
+                </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="doneButton" destination="HUG-uS-rqg" id="hUB-eZ-c9A"/>
-                <outlet property="flexibleSpaceLabel" destination="fTx-ck-dbJ" id="pqe-0g-YDK"/>
             </connections>
-            <point key="canvasLocation" x="-552.17391304347825" y="99.776785714285708"/>
+            <point key="canvasLocation" x="-317.39130434782612" y="99.776785714285708"/>
         </tableViewCell>
     </objects>
 </document>

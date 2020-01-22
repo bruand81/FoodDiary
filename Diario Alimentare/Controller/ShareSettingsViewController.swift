@@ -53,6 +53,7 @@ class ShareSettingsViewController: UITableViewController {
     var fromDateIndexPath: IndexPath?
     var toDateIndexPath: IndexPath?
     var shareFormat: ShareFormats = .excel
+    @IBOutlet weak var doneButton: UIBarButtonItem!
     
     fileprivate lazy var dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
