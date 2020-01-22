@@ -24,9 +24,10 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="856-v3-ucN">
-                        <rect key="frame" x="283" y="7" width="91" height="32"/>
+                        <rect key="frame" x="251" y="7" width="155" height="32"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <segments>
+                            <segment title="Excel"/>
                             <segment title="CSV"/>
                             <segment title="TSV"/>
                         </segments>

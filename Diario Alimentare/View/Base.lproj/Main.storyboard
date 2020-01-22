@@ -159,7 +159,7 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Meal" id="OF1-zX-sMh">
                         <leftBarButtonItems>
-                            <barButtonItem title="Item" id="J99-bL-LJj">
+                            <barButtonItem title="Cancel" image="cancel-icon" id="J99-bL-LJj">
                                 <connections>
                                     <action selector="cancelButtonPressed:" destination="C45-cB-TPs" id="1ld-Sb-ufe"/>
                                 </connections>
@@ -170,7 +170,7 @@
                                 </connections>
                             </barButtonItem>
                         </leftBarButtonItems>
-                        <barButtonItem key="rightBarButtonItem" title="Item" style="done" id="fmb-33-wHJ">
+                        <barButtonItem key="rightBarButtonItem" title="Done" image="done-icon" style="done" id="fmb-33-wHJ">
                             <connections>
                                 <action selector="doneButtonPressed:" destination="C45-cB-TPs" id="ZRS-OM-hbK"/>
                             </connections>
@@ -373,8 +373,10 @@
         </scene>
     </scenes>
     <resources>
-        <image name="emoji-icon" width="34.333332061767578" height="34.333332061767578"/>
-        <image name="meter-icon" width="25" height="26"/>
+        <image name="cancel-icon" width="13.333333015441895" height="13.333333015441895"/>
+        <image name="done-icon" width="13.333333015441895" height="13.333333015441895"/>
+        <image name="emoji-icon" width="13.333333015441895" height="13.333333015441895"/>
+        <image name="meter-icon" width="13.333333015441895" height="13.333333015441895"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="Uns-ST-Wbv"/>

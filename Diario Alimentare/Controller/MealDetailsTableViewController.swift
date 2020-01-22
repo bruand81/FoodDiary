@@ -55,6 +55,15 @@ class MealDetailsTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+//        doneBarButtonItem.title = NSLocalizedString("Done", comment: "")
+//        cancelBarButtonItem.title = NSLocalizedString("Cancel", comment: "")
+//        
+//        if #available(iOS 13.0, *) {
+//            doneBarButtonItem.image = UIImage(systemName: "checkmark")
+//            cancelBarButtonItem.image = UIImage(systemName: "chevron.left")
+//        }
+        
         tableView.isEditing = true
         guard let _ = meal?.dishes else {
             meal = Meal()
@@ -65,12 +74,6 @@ class MealDetailsTableViewController: UITableViewController {
         
         tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
         
-        doneBarButtonItem.title = NSLocalizedString("Done", comment: "")
-        cancelBarButtonItem.title = NSLocalizedString("Cancel", comment: "")
-        if #available(iOS 13.0, *) {
-            doneBarButtonItem.image = UIImage(systemName: "checkmark")
-            cancelBarButtonItem.image = UIImage(systemName: "chevron.left")
-        }
         // Uncomment the following line to preserve selection between presentations
         self.clearsSelectionOnViewWillAppear = false
 
@@ -569,7 +572,7 @@ extension MealDetailsTableViewController : PickerTableCellDelegate, PickerTableC
         }
         guard let emotionCell = tableView.cellForRow(at: indexPathForEmotion!) else {return}
         duplicateExitBarrier = true
-        emotionCell.textLabel?.textColor = UIColor.black
+        emotionCell.textLabel?.textColor = self.origCellLabelTextColor
         guard let currentMeal = meal, let emotion = emotionForMeal else {return}
 
         do {

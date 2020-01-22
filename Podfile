@@ -18,5 +18,7 @@ target 'Diario Alimentare' do
   pod 'Firebase/AdMob'
   pod 'Fabric'
   pod 'Crashlytics'
-  pod 'XlsxReaderWriter', '~> 2.4.0', :source => 'https://github.com/charlymr/XlsxReaderWriter-Podspecs.git'
+  # pod 'XlsxReaderWriter', '~> 2.4.0', :source => 'https://github.com/charlymr/XlsxReaderWriter-Podspecs.git'
+  # pod 'libxlsxwriter', '~> 0.3.1'
+  pod 'libxlsxwriter'
 end

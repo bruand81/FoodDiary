@@ -11,6 +11,8 @@ import RealmSwift
 import SwipeCellKit
 import PickerViewCell
 import Crashlytics
+import xlsxwriter
+
 
 enum ShareSettingsSection: CaseIterable {
     case viewConfigSection
@@ -30,6 +32,7 @@ enum ShareSettingsExportToCSVRow: CaseIterable {
 enum ShareFormats: CaseIterable {
     case csv
     case tsv
+    case excel
 }
 
 enum ShareSettingsViewControllerErrors: Error {
@@ -49,7 +52,7 @@ class ShareSettingsViewController: UITableViewController {
     var endDateText: Date?
     var fromDateIndexPath: IndexPath?
     var toDateIndexPath: IndexPath?
-    var shareFormat: ShareFormats = .csv
+    var shareFormat: ShareFormats = .excel
     
     fileprivate lazy var dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
@@ -292,6 +295,73 @@ class ShareSettingsViewController: UITableViewController {
         return tsvString
     }
     
+    func exportMealsInXlsx(meals: Results<Meal>) -> URL? {
+        let curDateAsText = dateFormatter.string(from: Date()).replacingOccurrences(of: " ", with: "_").replacingOccurrences(of: "/", with: "-").replacingOccurrences(of: ":", with: "")
+               
+        let file = "FoodDiary_\(curDateAsText).xlsx"
+        if let dir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
+            let fileURL = dir.appendingPathComponent(file)
+//            print(fileURL.path)
+//            print(fileURL.absoluteString)
+//            FileManager.default.createFile(atPath: fileURL.absoluteString, contents: nil, attributes: nil)
+            try! "".write(to: fileURL, atomically: false, encoding: .utf8)
+            
+            // Create a new workbook.
+            let workbook = workbook_new((fileURL.path as NSString).fileSystemRepresentation)
+            
+            let worksheet = workbook_add_worksheet(workbook, NSLocalizedString("Diary", comment: ""))
+            
+            // Add some cell formats.
+            let header_text = workbook_add_format(workbook)
+            let common_text = workbook_add_format(workbook)
+            let wrapped_text = workbook_add_format(workbook)
+            
+            // Set columna size
+            worksheet_set_column(worksheet, 0, 0, 15, nil)
+            worksheet_set_column(worksheet, 1, 2, 10, nil)
+            worksheet_set_column(worksheet, 3, 3, 40, nil)
+            worksheet_set_column(worksheet, 4, 4, 20, nil)
+            
+            // Set the bold property for the formats.
+            format_set_bold(header_text)
+            format_set_font_size(header_text, 14.0)
+            format_set_text_wrap(wrapped_text)
+            format_set_font_size(wrapped_text, 12.0)
+            format_set_font_size(common_text, 12.0)
+            format_set_bg_color(header_text, LXW_COLOR_GRAY.rawValue)
+            
+            //Writing header
+            worksheet_write_string(worksheet, 0, 0, NSLocalizedString("Diary", comment: ""), header_text)
+            worksheet_write_string(worksheet, 0, 1, NSLocalizedString("Time", comment: ""), header_text)
+            worksheet_write_string(worksheet, 0, 2, NSLocalizedString("Meal", comment: ""), header_text)
+            worksheet_write_string(worksheet, 0, 3, NSLocalizedString("Dishes", comment: ""), header_text)
+            worksheet_write_string(worksheet, 0, 4, NSLocalizedString("Emotion", comment: ""), header_text)
+            
+            var row = 0
+            meals.forEach { (meal) in
+                row+=1
+                let mealContent = meal.dishes.map({ (dish) -> String in
+                    var dishQuantity = ""
+                    if dish.quantity > 0 {
+                        dishQuantity = " (\(self.format(quantity: dish.quantity)) \(dish.measureUnitForDishes.first?.name ?? "NN"))"
+                    }
+                    return "\(dish.name)\(dishQuantity)"
+                }).joined(separator: " - ").replacingOccurrences(of: ",", with: ";")
+                let mealEmotion = meal.emotionForMeal.first
+                let mealEmotionText = "\(mealEmotion?.emoticon ?? "") \(mealEmotion?.name ?? "")"
+                
+                worksheet_write_string(worksheet, lxw_row_t(row), 0, dateOnlyFormatter.string(from: meal.when), common_text)
+                worksheet_write_string(worksheet, lxw_row_t(row), 1, timeOnlyFormatter.string(from: meal.when), common_text)
+                worksheet_write_string(worksheet, lxw_row_t(row), 2, meal.name, common_text)
+                worksheet_write_string(worksheet, lxw_row_t(row), 3, mealContent, wrapped_text)
+                worksheet_write_string(worksheet, lxw_row_t(row), 4, mealEmotionText, common_text)
+            }
+            workbook_close(workbook)
+            return fileURL
+        }
+        return nil
+    }
+    
     func saveToFile(content: String) throws -> URL{
         let curDateAsText = dateFormatter.string(from: Date()).replacingOccurrences(of: " ", with: "_").replacingOccurrences(of: "/", with: "-").replacingOccurrences(of: ":", with: "")
         
@@ -335,49 +405,51 @@ class ShareSettingsViewController: UITableViewController {
         
         guard let mealsToExport = meals else {return}
         
-        let textToExport = { () -> String in
-            switch self.shareFormat {
-            case .csv:
-                return self.exportMealsInCsv(meals: mealsToExport)
-            case .tsv:
-                return self.exportMealsInTsv(meals: mealsToExport)
-            }
-        };
-        
-        
+       
         do {
-            let fileUrl = try saveToFile(content: textToExport())
-            print(fileUrl)
-            let activityViewController = UIActivityViewController(activityItems: [fileUrl], applicationActivities: nil)
-            
-            activityViewController.completionWithItemsHandler = {(activityType: UIActivity.ActivityType?, completed: Bool, returnedItems: [Any]?, error: Error?) in
-                do {
-                    try FileManager.default.removeItem(at: fileUrl)
-                } catch {
-                    Crashlytics.sharedInstance().recordError(error)
-                    print("Error removing file \(error)")
+            let savedUrl = { () -> URL? in
+                switch self.shareFormat {
+                case .csv:
+                    return try self.saveToFile(content: self.exportMealsInCsv(meals: mealsToExport))
+                case .tsv:
+                    return try self.saveToFile(content: self.exportMealsInTsv(meals: mealsToExport))
+                case .excel:
+                    return self.exportMealsInXlsx(meals: mealsToExport)
                 }
-                if let errorOccurred = error {
-                    Crashlytics.sharedInstance().recordError(errorOccurred)
-                    print("Error in UIActivityViewController: \(errorOccurred)")
-                    return
-                }
-                if !completed {
-                    // User canceled
+            };
+            if let fileUrl = try savedUrl() {
+//                print(fileUrl)
+                let activityViewController = UIActivityViewController(activityItems: [fileUrl], applicationActivities: nil)
+                
+                activityViewController.completionWithItemsHandler = {(activityType: UIActivity.ActivityType?, completed: Bool, returnedItems: [Any]?, error: Error?) in
                     do {
                         try FileManager.default.removeItem(at: fileUrl)
                     } catch {
                         Crashlytics.sharedInstance().recordError(error)
                         print("Error removing file \(error)")
                     }
-                    return
+                    if let errorOccurred = error {
+                        Crashlytics.sharedInstance().recordError(errorOccurred)
+                        print("Error in UIActivityViewController: \(errorOccurred)")
+                        return
+                    }
+                    if !completed {
+                        // User canceled
+                        do {
+                            try FileManager.default.removeItem(at: fileUrl)
+                        } catch {
+                            Crashlytics.sharedInstance().recordError(error)
+                            print("Error removing file \(error)")
+                        }
+                        return
+                    }
+                    // User completed activity
+                    self.navigationController?.popViewController(animated: true)
+                    self.dismiss(animated: true, completion: nil)
                 }
-                // User completed activity
-                self.navigationController?.popViewController(animated: true)
-                self.dismiss(animated: true, completion: nil)
+                
+                present(activityViewController, animated: true)
             }
-            
-            present(activityViewController, animated: true)
         } catch {
             Crashlytics.sharedInstance().recordError(error)
             print("Error saving file \(error)")
@@ -397,6 +469,8 @@ extension ShareSettingsViewController: SegmentedControlDelegate{
             shareFormat = .csv
         case "TSV":
             shareFormat = .tsv
+        case "Excel":
+            shareFormat = .excel
         default:
             print(selectedFormat ?? "")
         }

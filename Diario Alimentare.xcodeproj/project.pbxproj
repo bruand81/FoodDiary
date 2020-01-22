@@ -26,6 +26,7 @@
 		A5D0850D23D72C4500961525 /* SegmentedControlCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A5D0850B23D72C4500961525 /* SegmentedControlCell.xib */; };
 		A5D0850F23D739E700961525 /* SwitchCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A5D0850E23D739E700961525 /* SwitchCell.xib */; };
 		A5D0851123D73BF300961525 /* SwitchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D0851023D73BF300961525 /* SwitchCell.swift */; };
+		A5D0851523D7645600961525 /* test.m in Sources */ = {isa = PBXBuildFile; fileRef = A5D0851423D7645600961525 /* test.m */; };
 		A5E61DEE2285BBE300B14772 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E61DED2285BBE300B14772 /* AppDelegate.swift */; };
 		A5E61DF32285BBE300B14772 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A5E61DF12285BBE300B14772 /* Main.storyboard */; };
 		A5E61DF52285BBE900B14772 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A5E61DF42285BBE900B14772 /* Assets.xcassets */; };
@@ -57,6 +58,8 @@
 		A5D0850B23D72C4500961525 /* SegmentedControlCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SegmentedControlCell.xib; sourceTree = "<group>"; };
 		A5D0850E23D739E700961525 /* SwitchCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SwitchCell.xib; sourceTree = "<group>"; };
 		A5D0851023D73BF300961525 /* SwitchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwitchCell.swift; sourceTree = "<group>"; };
+		A5D0851323D7645600961525 /* Diario Alimentare-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Diario Alimentare-Bridging-Header.h"; sourceTree = "<group>"; };
+		A5D0851423D7645600961525 /* test.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = test.m; sourceTree = "<group>"; };
 		A5E61DEA2285BBE300B14772 /* Diario Alimentare.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Diario Alimentare.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5E61DED2285BBE300B14772 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A5E61DF22285BBE300B14772 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -106,10 +109,12 @@
 		A5E61DE12285BBE300B14772 = {
 			isa = PBXGroup;
 			children = (
+				A5D0851423D7645600961525 /* test.m */,
 				A5E61DEC2285BBE300B14772 /* Diario Alimentare */,
 				A5E61DEB2285BBE300B14772 /* Products */,
 				289EC5A3F4DB370361ED2B60 /* Pods */,
 				2B64A61D5CF40806BC6510CA /* Frameworks */,
+				A5D0851323D7645600961525 /* Diario Alimentare-Bridging-Header.h */,
 			);
 			sourceTree = "<group>";
 		};
@@ -230,6 +235,7 @@
 				TargetAttributes = {
 					A5E61DE92285BBE300B14772 = {
 						CreatedOnToolsVersion = 10.2.1;
+						LastSwiftMigration = 1130;
 					};
 				};
 			};
@@ -345,6 +351,7 @@
 				A5D0850C23D72C4500961525 /* SegmentedControlCell.swift in Sources */,
 				A55A31FA23C1C77400F287AA /* MeasureUnitTableViewController.swift in Sources */,
 				A5E61E0A2285C29A00B14772 /* Emotion.swift in Sources */,
+				A5D0851523D7645600961525 /* test.m in Sources */,
 				A50C0F9522868941005EB843 /* MealTableViewController.swift in Sources */,
 				A50C0F972286899C005EB843 /* EmotionTableViewController.swift in Sources */,
 				A569299C23D1CA010045CC46 /* ShareSettingsViewController.swift in Sources */,
@@ -512,6 +519,7 @@
 			baseConfigurationReference = F43526FF8FFF31BE8F76E9F7 /* Pods-Diario Alimentare.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 4;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -526,6 +534,8 @@
 				MARKETING_VERSION = 1.5.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "cloud.antares.Food-Diary";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Diario Alimentare-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -536,6 +546,7 @@
 			baseConfigurationReference = D01049417D8389F7FCF628A8 /* Pods-Diario Alimentare.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = Z855PRXKLZ;
@@ -549,6 +560,7 @@
 				MARKETING_VERSION = 1.5.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "cloud.antares.Food-Diary";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Diario Alimentare-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
