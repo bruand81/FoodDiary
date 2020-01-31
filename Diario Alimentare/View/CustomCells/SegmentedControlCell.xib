@@ -16,16 +16,17 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vvN-RO-Ntw">
-                        <rect key="frame" x="20" y="0.0" width="121" height="44"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vvN-RO-Ntw">
+                        <rect key="frame" x="8" y="8" width="141" height="28"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="856-v3-ucN">
-                        <rect key="frame" x="149" y="7" width="155" height="32"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="856-v3-ucN">
+                        <rect key="frame" x="157" y="8" width="155" height="29"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="155" id="bex-IW-yOG"/>
+                        </constraints>
                         <segments>
                             <segment title="Excel"/>
                             <segment title="CSV"/>
@@ -36,6 +37,15 @@
                         </connections>
                     </segmentedControl>
                 </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="856-v3-ucN" secondAttribute="trailing" constant="8" id="0hD-zJ-eEs"/>
+                    <constraint firstAttribute="bottom" secondItem="vvN-RO-Ntw" secondAttribute="bottom" constant="8" id="29d-Tc-tEx"/>
+                    <constraint firstAttribute="bottom" secondItem="856-v3-ucN" secondAttribute="bottom" constant="8" id="DCS-th-Fpf"/>
+                    <constraint firstItem="856-v3-ucN" firstAttribute="leading" secondItem="vvN-RO-Ntw" secondAttribute="trailing" constant="8" id="EdL-kY-muk"/>
+                    <constraint firstItem="vvN-RO-Ntw" firstAttribute="leading" secondItem="48G-cS-dYe" secondAttribute="leading" constant="8" id="LVg-lx-QJz"/>
+                    <constraint firstItem="856-v3-ucN" firstAttribute="top" secondItem="48G-cS-dYe" secondAttribute="top" constant="8" id="VHo-Ph-9W0"/>
+                    <constraint firstItem="vvN-RO-Ntw" firstAttribute="top" secondItem="48G-cS-dYe" secondAttribute="top" constant="8" id="gYd-Et-ox0"/>
+                </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="formatSegmentedControl" destination="856-v3-ucN" id="fJI-4j-JaK"/>

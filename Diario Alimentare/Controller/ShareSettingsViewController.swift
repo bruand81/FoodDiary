@@ -172,6 +172,11 @@ class ShareSettingsViewController: UITableViewController {
         }
     }
     
+    func expandCellToTableWidth(cell: UITableViewCell) {
+        let cellFrame = cell.contentView.frame
+        let newFrame = CGRect(origin: cellFrame.origin, size: CGSize(width: tableView.frame.width, height: cellFrame.height))
+        cell.contentView.frame = newFrame
+    }
     func cellForExportToCsvSettings(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         if ShareSettingsExportToCSVRow.allCases.count <= indexPath.row {
@@ -183,6 +188,7 @@ class ShareSettingsViewController: UITableViewController {
             let cell = tableView.dequeueReusableCell(withIdentifier: "segmentedControlCell", for: indexPath) as! SegmentedControlCell
             cell.delegate = self
             cell.labelForSwitch.text = NSLocalizedString("Export format", comment: "")
+            expandCellToTableWidth(cell: cell)
             return cell
         case .fromDate:
             if !dateIndexSet.contains(indexPath) {
@@ -226,6 +232,7 @@ class ShareSettingsViewController: UITableViewController {
             let cell = tableView.dequeueReusableCell(withIdentifier: "switchCell", for: indexPath) as! SwitchCell
             cell.delegate = self
             cell.labelForSwitch.text = NSLocalizedString("Export all", comment: "")
+            expandCellToTableWidth(cell: cell)
             return cell
         case .exportButton:
             let cell = tableView.dequeueReusableCell(withIdentifier: "exportButtonCell", for: indexPath)
@@ -264,11 +271,19 @@ class ShareSettingsViewController: UITableViewController {
         return realm.objects(Meal.self).filter("when BETWEEN {%@, %@}", startDate,endDate).sorted(byKeyPath: "when", ascending: true)
     }
     
+    func dishToString(dish: Dish) -> String {
+        var dishQuantity = ""
+        if dish.quantity > 0 {
+           dishQuantity = " (\(self.format(quantity: dish.quantity)) \(dish.measureUnitForDishes.first?.name ?? "NN"))"
+        }
+        return "\(dish.name)\(dishQuantity)"
+    }
+    
     func exportMealsInCsv(meals: Results<Meal>) -> String {
         var csvString = "\"\(NSLocalizedString("Date", comment: ""))\",\"\(NSLocalizedString("Time", comment: ""))\",\"\(NSLocalizedString("Meal", comment: ""))\",\"\(NSLocalizedString("Dishes", comment: ""))\",\"\(NSLocalizedString("Emotion", comment: ""))\"\n"
         meals.forEach { (meal) in
             let mealContent = meal.dishes.map({ (dish) -> String in
-                return dish.name
+                return self.dishToString(dish: dish)
             }).joined(separator: " - ").replacingOccurrences(of: ",", with: ";")
             let mealEmotion = meal.emotionForMeal.first
             let mealEmotionText = "\(mealEmotion?.emoticon ?? "") \(mealEmotion?.name ?? "")"
@@ -282,11 +297,7 @@ class ShareSettingsViewController: UITableViewController {
         var tsvString = "\(NSLocalizedString("Date", comment: ""))\t\(NSLocalizedString("Time", comment: ""))\t\(NSLocalizedString("Meal", comment: ""))\t\(NSLocalizedString("Dishes", comment: ""))\t\(NSLocalizedString("Emotion", comment: ""))\n"
         meals.forEach { (meal) in
             let mealContent = meal.dishes.map({ (dish) -> String in
-                var dishQuantity = ""
-                if dish.quantity > 0 {
-                    dishQuantity = " (\(self.format(quantity: dish.quantity)) \(dish.measureUnitForDishes.first?.name ?? "NN"))"
-                }
-                return "\(dish.name)\(dishQuantity)"
+                return self.dishToString(dish: dish)
             }).joined(separator: " - ").replacingOccurrences(of: ",", with: ";")
             let mealEmotion = meal.emotionForMeal.first
             let mealEmotionText = "\(mealEmotion?.emoticon ?? "") \(mealEmotion?.name ?? "")"
@@ -342,11 +353,7 @@ class ShareSettingsViewController: UITableViewController {
             meals.forEach { (meal) in
                 row+=1
                 let mealContent = meal.dishes.map({ (dish) -> String in
-                    var dishQuantity = ""
-                    if dish.quantity > 0 {
-                        dishQuantity = " (\(self.format(quantity: dish.quantity)) \(dish.measureUnitForDishes.first?.name ?? "NN"))"
-                    }
-                    return "\(dish.name)\(dishQuantity)"
+                    return self.dishToString(dish: dish)
                 }).joined(separator: " - ").replacingOccurrences(of: ",", with: ";")
                 let mealEmotion = meal.emotionForMeal.first
                 let mealEmotionText = "\(mealEmotion?.emoticon ?? "") \(mealEmotion?.name ?? "")"

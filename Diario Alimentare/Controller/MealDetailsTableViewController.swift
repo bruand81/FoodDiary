@@ -10,6 +10,7 @@ import UIKit
 //import ChameleonFramework
 import PickerViewCell
 import RealmSwift
+import Crashlytics
 
 enum SectionOfMealDetails: Int {
     case mealName = 0
@@ -519,6 +520,7 @@ extension MealDetailsTableViewController : DatePickerTableCellDelegate{
                 currentMeal.when = newDate
             }
         } catch {
+            Crashlytics.sharedInstance().recordError(error)
             print("error updating meal \(error)")
         }
         cell.textLabel?.textColor = self.origCellLabelTextColor

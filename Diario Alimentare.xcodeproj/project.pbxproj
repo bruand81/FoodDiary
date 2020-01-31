@@ -213,6 +213,7 @@
 				A5E61DE82285BBE300B14772 /* Resources */,
 				A55440B88DB43F65E4143077 /* [CP] Embed Pods Frameworks */,
 				A565F58723C85C53002A59D8 /* ShellScript */,
+				A5ED322123DA1CAB00AFC63C /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -334,6 +335,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n\"${PODS_ROOT}/Fabric/run\"\n";
+		};
+		A5ED322123DA1CAB00AFC63C /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nfind dSYM_directory -name \"*.dSYM\" | xargs -I \\{\\} $PODS_ROOT/Fabric/upload-symbols -gsp  ./Diario\\ Alimentare/GoogleService-Info.plist -p ios \\{\\}\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -521,7 +539,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 6;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = Z855PRXKLZ;
 				GADUnitId = "";
@@ -531,7 +549,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.5.0;
+				MARKETING_VERSION = 1.5.2;
 				PRODUCT_BUNDLE_IDENTIFIER = "cloud.antares.Food-Diary";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Diario Alimentare-Bridging-Header.h";
@@ -548,7 +566,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_TEAM = Z855PRXKLZ;
 				GADUnitId = "";
 				"GADUnitId[arch=*]" = "ca-app-pub-7085815040234496/8320130886";
@@ -557,7 +575,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.5.0;
+				MARKETING_VERSION = 1.5.2;
 				PRODUCT_BUNDLE_IDENTIFIER = "cloud.antares.Food-Diary";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Diario Alimentare-Bridging-Header.h";

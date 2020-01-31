@@ -16,21 +16,31 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Kf-F8-GSX">
-                        <rect key="frame" x="20" y="0.0" width="239" height="44"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Kf-F8-GSX">
+                        <rect key="frame" x="8" y="8" width="249" height="28"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="C4P-Is-zbe">
-                        <rect key="frame" x="267" y="7" width="49" height="31"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="C4P-Is-zbe">
+                        <rect key="frame" x="265" y="8" width="49" height="28"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="47" id="7vg-oT-W6z"/>
+                        </constraints>
                         <connections>
                             <action selector="switchValueChanged:" destination="mZX-5p-yMe" eventType="valueChanged" id="v0E-39-kY0"/>
                         </connections>
                     </switch>
                 </subviews>
+                <constraints>
+                    <constraint firstItem="C4P-Is-zbe" firstAttribute="top" secondItem="4v5-D6-Tc6" secondAttribute="top" constant="8" id="2Jc-qz-q0t"/>
+                    <constraint firstItem="7Kf-F8-GSX" firstAttribute="top" secondItem="4v5-D6-Tc6" secondAttribute="top" constant="8" id="Dy9-cM-J1p"/>
+                    <constraint firstAttribute="bottom" secondItem="7Kf-F8-GSX" secondAttribute="bottom" constant="8" id="NDt-kW-rAy"/>
+                    <constraint firstItem="C4P-Is-zbe" firstAttribute="leading" secondItem="7Kf-F8-GSX" secondAttribute="trailing" constant="8" id="Qmv-ZI-Mhp"/>
+                    <constraint firstAttribute="bottom" secondItem="C4P-Is-zbe" secondAttribute="bottom" constant="8" id="g1A-bW-gO2"/>
+                    <constraint firstAttribute="trailing" secondItem="C4P-Is-zbe" secondAttribute="trailing" constant="8" id="pVE-k9-s6G"/>
+                    <constraint firstItem="7Kf-F8-GSX" firstAttribute="leading" secondItem="4v5-D6-Tc6" secondAttribute="leading" constant="8" id="y4p-lA-dbo"/>
+                </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="cellSwitch" destination="C4P-Is-zbe" id="mW2-8U-KO9"/>
