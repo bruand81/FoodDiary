@@ -270,7 +270,8 @@ class MealDetailsTableViewController: UITableViewController {
         let action = UIAlertAction(title: NSLocalizedString(actionButtonTitle, comment: ""), style: .default) { (action) in
             //What will happen when the user clicks the Add Button on our UIAlert
             if let addDishText = dishNameTextField.text {
-                let quantity = Double(quantityTextField.text ?? "-1") ?? -1
+                //let quantity = Double(quantityTextField.text ?? "-1") ?? -1
+                let quantity = self.parseQuantity(from: quantityTextField.text ?? "")
 
                 if let indexPath = idx {
                     do {
@@ -317,7 +318,7 @@ class MealDetailsTableViewController: UITableViewController {
         }
         
         alert.addTextField { (alertTextField) in
-            if idx != nil {
+            if idx != nil && dish.quantity > 0 {
                 alertTextField.text = "\(self.format(quantity:dish.quantity))"
             } else {
                 alertTextField.placeholder =  NSLocalizedString("Dish quantity eaten", comment: "")
@@ -327,7 +328,7 @@ class MealDetailsTableViewController: UITableViewController {
         }
         
         alert.addTextField { (alertTextField) in
-            if idx != nil {
+            if idx != nil && dish.quantity > 0 {
                 alertTextField.text = self.measureUnitSelected?.name
             } else {
                 alertTextField.placeholder = NSLocalizedString("Dish quantity measure unit", comment: "")
@@ -342,6 +343,14 @@ class MealDetailsTableViewController: UITableViewController {
         alert.addAction(cancelAction)
         
         present(alert, animated: true, completion: nil)
+    }
+    
+    func parseQuantity(from text:String) -> Double {
+        let formatter = NumberFormatter()
+        formatter.locale = Locale.current
+        formatter.numberStyle = .decimal
+        let number = formatter.number(from: text)
+        return number?.doubleValue ?? -1
     }
     
 
@@ -491,7 +500,7 @@ class MealDetailsTableViewController: UITableViewController {
     }
     
     @objc func cancelClick() {
-        measureUnitPicker   .isHidden = true
+        measureUnitPicker.isHidden = true
         self.toolBar.isHidden = true
     }
     

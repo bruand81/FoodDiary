@@ -271,6 +271,9 @@ extension MealTableViewController: SwipeTableViewCellDelegate {
                             newMeal.dishes.append(newDish)
                         }
                     }
+                    self.selectedMeal = newMeal
+                    self.createNewMeal = false
+                    self.performSegue(withIdentifier: "goToMealDetails", sender: self)
                 } catch {
                    print("Error deleting meal \(error)")
                 }
